@@ -11,6 +11,10 @@ namespace LogicaNegocio.ValueObjects
         public string Ciudad { get; }
         public int DistanciaPapeleria { get; }
 
+        public Direccion()
+        {
+
+        }
         public Direccion(string calle, string num, string ciudad, int distancia)
         {
             Calle = calle;
@@ -44,7 +48,7 @@ namespace LogicaNegocio.ValueObjects
             }
         }
 
-        public void ValidarCiudad()
+        private void ValidarCiudad()
         {
             if(string.IsNullOrEmpty(Ciudad))
             {
@@ -52,7 +56,7 @@ namespace LogicaNegocio.ValueObjects
             }
         }
 
-        public void ValidarDistanciaPaleleria()
+        private void ValidarDistanciaPaleleria()
         {
             if(DistanciaPapeleria < 0)
             {

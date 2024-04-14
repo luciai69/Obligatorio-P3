@@ -1,10 +1,12 @@
-﻿using LogicaNegocio.Entidades;
+﻿using LogicaNegocio.CarpetaDtos;
+using LogicaNegocio.CarpetaDtos.MapeosDtos;
+using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorio;
 using LogicaNegocio.InterfacesServicios;
 
 namespace LogicaAplicacion.Usuarios
 {
-    public class EditarUsuario : IEditar<Usuario>
+    public class EditarUsuario : IEditar<UsuarioDto>
     {
         IRepositorioUsuario _repositorioUsuario;
 
@@ -13,9 +15,11 @@ namespace LogicaAplicacion.Usuarios
             _repositorioUsuario = repositorioUsuario;
         }
 
-        public void Ejecutar(int id, Usuario obj)
+        public void Ejecutar(int id, UsuarioDto obj)
         {
-            _repositorioUsuario.Update(id, obj);
+            Usuario usuario = UsuarioMappers.FromDto(obj);
+
+            _repositorioUsuario.Update(id, usuario);
         }
     }
 }

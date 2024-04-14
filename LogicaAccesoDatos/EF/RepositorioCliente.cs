@@ -52,5 +52,15 @@ namespace LogicaAccesoDatos.EF
         {
             throw new NotImplementedException();
         }
+
+        //public IEnumerable<Usuario> GetByMonto(int monto)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public IEnumerable<Usuario> GetByName(string name) //TODO Como valida solo parte del string?
+        //{
+        //    return _context.Usuarios.Where(usuario => usuario.NombreCompleto. == name);
+        //}
     }
 }

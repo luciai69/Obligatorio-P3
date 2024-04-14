@@ -1,10 +1,12 @@
-﻿using LogicaNegocio.Entidades;
+﻿using LogicaNegocio.CarpetaDtos.MapeosDtos;
+using LogicaNegocio.CarpetaDtos;
+using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorio;
 using LogicaNegocio.InterfacesServicios;
 
 namespace LogicaAplicacion.Usuarios
 {
-    public class ObtenerUsuario : IObtener<Usuario>
+    public class ObtenerUsuario : IObtener<UsuarioDto>
     {
         IRepositorioUsuario _repositorioUsuario;
 
@@ -13,9 +15,10 @@ namespace LogicaAplicacion.Usuarios
             _repositorioUsuario = repositotioUsuario;
         }
 
-        public Usuario Ejecutar(int id)
+        public UsuarioDto Ejecutar(int id)
         {
-            return _repositorioUsuario.GetById(id);
+            UsuarioDto usuarioDto = UsuarioMappers.ToDto(_repositorioUsuario.GetById(id));
+            return usuarioDto;
         }
     }
 }

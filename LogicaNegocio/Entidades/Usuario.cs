@@ -1,5 +1,6 @@
 ﻿using LogicaNegocio.Excepciones.Usuario;
 using LogicaNegocio.InterfacesDominio;
+using LogicaNegocio.ValueObjects;
 
 namespace LogicaNegocio.Entidades
 {
@@ -7,15 +8,13 @@ namespace LogicaNegocio.Entidades
     {
         public int Id { get; set; }
         public string Mail { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
+        public required NombreCompleto NombreCompleto { get; set; }
         public string Contrasenia { get; set; }
+        public string Discriminator { get; set; }
 
         public void Validar()
         {
             ValidarMail();
-            ValidarNombre();
-            ValidarApellido();
             ValidarContrasenia();
         }
 
@@ -27,21 +26,6 @@ namespace LogicaNegocio.Entidades
             }
         }
 
-        private void ValidarNombre() //TODO Validar los temas de formato
-        {
-            if (string.IsNullOrEmpty(Nombre))
-            {
-                throw new NombreUsuarioInvalidaException();
-            }
-        }
-
-        private void ValidarApellido() //TODO Validar los temas de formato
-        {
-            if (string.IsNullOrEmpty(Apellido))
-            {
-                throw new ApellidoUsuarioInvalidaException();
-            }
-        }
 
         private void ValidarContrasenia() //TODO Validar los temas de formato
         {
@@ -53,8 +37,7 @@ namespace LogicaNegocio.Entidades
         public void Update(Usuario obj)
         {
             obj.Validar();
-            Nombre = obj.Nombre;
-            Apellido = obj.Apellido;
+            NombreCompleto = obj.NombreCompleto;
             Contrasenia = obj.Contrasenia;
         }
     }

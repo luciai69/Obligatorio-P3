@@ -3,6 +3,8 @@ using LogicaAplicacion.Articulos;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesServicios;
 using LogicaNegocio.InterfacesRepositorio;
+using LogicaNegocio.CarpetaDtos;
+using LogicaAplicacion.Usuarios;
 
 namespace WebApp
 {
@@ -17,8 +19,19 @@ namespace WebApp
 
             // REPOSITORIOS
             builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
+            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+            builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
+
 
             // CASOS DE USO
+            //Usuarios
+            builder.Services.AddScoped<IAlta<UsuarioDto>, AltaUsuario>();
+            builder.Services.AddScoped<IEditar<UsuarioDto>, EditarUsuario>();
+            builder.Services.AddScoped<IEliminar<Usuario>, EliminarUsuario>();
+            builder.Services.AddScoped<IObtener<UsuarioDto>, ObtenerUsuario>();
+            builder.Services.AddScoped<IObtenerTodos<UsuarioDto>, ObtenerUsuarios>();
+
+            //Articulos
             builder.Services.AddScoped<IAlta<Articulo>, AltaArticulo>();
             builder.Services.AddScoped<IObtenerTodos<Articulo>, ObtenerArticulos>();
 
