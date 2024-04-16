@@ -1,10 +1,6 @@
 ﻿using LogicaNegocio.Entidades;
 using LogicaNegocio.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace LogicaNegocio.CarpetaDtos.MapeosDtos
 {
@@ -14,10 +10,11 @@ namespace LogicaNegocio.CarpetaDtos.MapeosDtos
         {
             return new Usuario()
             {
+                Id = usuarioDto.Id,
                 NombreCompleto = new NombreCompleto(usuarioDto.Nombre, usuarioDto.Apellido),
                 Mail = usuarioDto.Mail,
                 Contrasenia = usuarioDto.Contrasenia,
-     
+                Discriminator = usuarioDto.Discriminator,
             };
         }
 

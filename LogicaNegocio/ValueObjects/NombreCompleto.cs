@@ -16,6 +16,7 @@ namespace LogicaNegocio.ValueObjects
         {
             Nombre = nombre;
             Apellido = apellido;
+            Validar();
         }
         public void Validar()
         {
