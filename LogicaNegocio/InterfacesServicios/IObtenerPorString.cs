@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.InterfacesServicios
 {
-    internal interface IBuscarPorMonto
+    public interface IObtenerPorString<T>
     {
+        public IEnumerable<T> Ejecutar(string dato);
     }
 }

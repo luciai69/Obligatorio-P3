@@ -1,10 +1,12 @@
 ﻿using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorio;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LogicaAccesoDatos.EF
 {
@@ -38,15 +40,12 @@ namespace LogicaAccesoDatos.EF
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Cliente> GetByMonto(int monto)
-        {
-            throw new NotImplementedException();
-        }
+        //public IEnumerable<Cliente> GetByMonto(int monto)
+        //{
+        //    return _context.Clientes.
+        //        Include(cliente => cliente.Pedidos).
+        //}
 
-        public IEnumerable<Cliente> GetByName(string name)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Update(int id, Cliente obj)
         {
@@ -58,9 +57,10 @@ namespace LogicaAccesoDatos.EF
         //    throw new NotImplementedException();
         //}
 
-        //public IEnumerable<Usuario> GetByName(string name) //TODO Como valida solo parte del string?
-        //{
-        //    return _context.Usuarios.Where(usuario => usuario.NombreCompleto. == name);
-        //}
+        public IEnumerable<Cliente> GetByString(string dato) 
+        {
+            return _context.Clientes.
+                Where(cliente => cliente.Rut.ToLower().Contains(dato.ToLower()));
+        }
     }
 }

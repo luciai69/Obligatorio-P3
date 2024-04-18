@@ -12,6 +12,7 @@ namespace LogicaNegocio.Entidades
         public string RazonSoc { get; set; }
         public string Rut { get; set; }
         public Direccion Direccion { get; set; }
+        public List<Pedido> Pedidos { get; set; } = new List<Pedido>();
 
         public void Validar()
         {

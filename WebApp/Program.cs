@@ -5,6 +5,7 @@ using LogicaNegocio.InterfacesServicios;
 using LogicaNegocio.InterfacesRepositorio;
 using LogicaNegocio.CarpetaDtos;
 using LogicaAplicacion.Usuarios;
+using LogicaAplicacion.Clientes;
 
 namespace WebApp
 {
@@ -30,7 +31,11 @@ namespace WebApp
             builder.Services.AddScoped<IEliminar<Usuario>, EliminarUsuario>();
             builder.Services.AddScoped<IObtener<UsuarioDto>, ObtenerUsuario>();
             builder.Services.AddScoped<IObtenerTodos<UsuarioDto>, ObtenerUsuarios>();
+            builder.Services.AddScoped<IObtenerPorDosString<Usuario>, ObtenerPorDosString>();
 
+
+            //Clientes
+            builder.Services.AddScoped<IObtenerTodos<Cliente>, ObtenerClientes>();
             //Articulos
             builder.Services.AddScoped<IAlta<Articulo>, AltaArticulo>();
             builder.Services.AddScoped<IObtenerTodos<Articulo>, ObtenerArticulos>();
@@ -43,6 +48,7 @@ namespace WebApp
             // inyecta el contexto 
             builder.Services.AddDbContext<PapeleriaContext>();
 
+            builder.Services.AddSession();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -59,6 +65,8 @@ namespace WebApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

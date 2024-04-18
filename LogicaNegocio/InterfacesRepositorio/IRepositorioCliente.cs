@@ -9,7 +9,7 @@ namespace LogicaNegocio.InterfacesRepositorio
 {
     public interface IRepositorioCliente : IRepositorio<Cliente>
     {
-        public IEnumerable<Cliente> GetByName(string name);
+        public IEnumerable<Cliente> GetByString(string dato);
 
         public IEnumerable<Cliente> GetByMonto(int monto);
 

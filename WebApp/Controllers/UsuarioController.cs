@@ -5,28 +5,22 @@ using LogicaNegocio.Excepciones.Usuario;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Filter;
 
 namespace WebApp.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController(
+        IAlta<AdminDto> altaUsuario, IEditar<UsuarioDto> editarUsuario, IEliminar<Usuario> eliminarUsuario, IObtener<UsuarioDto> obtenerUsuario, IObtenerTodos<UsuarioDto> obtenerTodos, IObtenerPorDosString<Usuario> obtenerUsuarioPorDosString) : Controller
     {
-        IAlta<UsuarioDto> _altaUsuario;
-        IEditar<UsuarioDto> _editarUsuario;
-        IEliminar<Usuario> _eliminarUsuario;
-        IObtener<UsuarioDto> _obtenerUsuario;
-        IObtenerTodos<UsuarioDto> _obtenerUsuarios;
+        IAlta<AdminDto> _altaUsuario = altaUsuario;
+        IEditar<UsuarioDto> _editarUsuario = editarUsuario;
+        IEliminar<Usuario> _eliminarUsuario = eliminarUsuario;
+        IObtener<UsuarioDto> _obtenerUsuario = obtenerUsuario;
+        IObtenerTodos<UsuarioDto> _obtenerUsuarios = obtenerTodos;
+        IObtenerPorDosString<Usuario> _obtenerUsuarioPorDosString = obtenerUsuarioPorDosString;
 
-        public UsuarioController(
-            IAlta<UsuarioDto> altaUsuario, IEditar<UsuarioDto> editarUsuario, IEliminar<Usuario> eliminarUsuario,IObtener<UsuarioDto> obtenerUsuario ,IObtenerTodos<UsuarioDto> obtenerTodos)
-        {
-            _altaUsuario = altaUsuario;
-            _editarUsuario = editarUsuario;
-            _eliminarUsuario = eliminarUsuario;
-            _obtenerUsuario = obtenerUsuario;
-            _obtenerUsuarios = obtenerTodos;
-        }
-
-                // GET: UsuarioController
+        [AdminAutorizado]
+        // GET: UsuarioController
         public IActionResult Index(string mensaje)
         {
             ViewBag.mensaje = mensaje;
@@ -39,20 +33,22 @@ namespace WebApp.Controllers
         //    return View();
         //}
 
+        [AdminAutorizado]
         // GET: UsuarioController/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        [AdminAutorizado]
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(UsuarioDto usuarioDto)//TODO Ver DTOs
+        public IActionResult Create(AdminDto adminDto)//TODO Ver DTOs
         {
             try
             {
-                _altaUsuario.Ejecutar(usuarioDto);
+                _altaUsuario.Ejecutar(adminDto);
                 return RedirectToAction("Index", new { mensaje = "Usuario creado exitosamente." }); //TODO recibir en view.
             }
             catch (ContraseniaUsuarioInvalidaException e)
@@ -68,9 +64,10 @@ namespace WebApp.Controllers
                 ViewBag.Mensaje = "Hubo un error al crear usuario. Intente nuevamente.";
             }
 
-            return View(usuarioDto);
+            return View(adminDto);
         }
 
+        [AdminAutorizado]
         // GET: UsuarioController/Edit/5
         public IActionResult Edit(int id)
         {
@@ -90,6 +87,7 @@ namespace WebApp.Controllers
 
         }
 
+        [AdminAutorizado]
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -106,6 +104,7 @@ namespace WebApp.Controllers
             }
         }
 
+        [AdminAutorizado]
         // GET: UsuarioController/Delete/5
         public IActionResult Delete(int id)
         {
@@ -123,6 +122,7 @@ namespace WebApp.Controllers
             return View(usuarioDto);
         }
 
+        [AdminAutorizado]
         // POST: UsuarioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -141,6 +141,39 @@ namespace WebApp.Controllers
             {
                 return RedirectToAction("Index", new { mensaje = "No se puedo dar de baja. Intente nuevamente." });
             }
+        }
+
+        public IActionResult Login(string Email, string Password)
+        {
+            Usuario unUsuario = _obtenerUsuarioPorDosString.Ejecutar(Email, Password);
+            try
+            {
+                if(unUsuario == null)
+                {
+                    throw new UsuarioNullException();
+                }
+                if(unUsuario is Administrador)
+                {
+                    HttpContext.Session.SetString("Rol", "Administrador");
+                    HttpContext.Session.SetString("Nombre", unUsuario.NombreCompleto.Nombre);
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ViewBag.mensaje = "Pruebe de nuevo.";
+            }
+
+            return RedirectToAction("Index","Home");
+
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

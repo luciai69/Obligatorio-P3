@@ -5,6 +5,22 @@
 }
 
 <h1>Index</h1>
+@if (@ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+
+<form action="/cliente/ObtenerPorRut">
+    <input type="text" name="rut" placeholder="Ingrese RUT a buscar">
+    <button type="submit">Buscar</button>
+</form>
+
+<form action="/cliente/ObtenerPorMonto">
+    <input type="number" name="monto" placeholder="Ingrese monto a buscar">
+    <button type="submit">Buscar</button>
+</form>
 
 <div class="input-group">
     <div class="form-outline" data-mdb-input-init>
@@ -16,9 +32,6 @@
     </button>
 </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -45,11 +58,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rut)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

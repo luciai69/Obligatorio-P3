@@ -43,6 +43,11 @@ namespace LogicaAccesoDatos.EF
                 ToList();
         }
 
+        public Usuario Login(string email, string password)
+        {
+            return _context.Usuarios.FirstOrDefault(usuario => usuario.Mail == email && usuario.Contrasenia == password);
+        }
+
         public Usuario GetById(int id)
         {
             return _context.Usuarios.FirstOrDefault(usuario => usuario.Id == id);

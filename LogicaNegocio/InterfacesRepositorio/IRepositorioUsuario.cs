@@ -9,7 +9,7 @@ namespace LogicaNegocio.InterfacesRepositorio
 {
     public interface IRepositorioUsuario : IRepositorio<Usuario>
     {
-
+        public Usuario Login(string email, string password);
 
     }
 }

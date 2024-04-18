@@ -4,6 +4,7 @@ using LogicaNegocio.Excepciones.Articulo;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Filter;
 
 namespace WebApp.Controllers
 {
@@ -32,6 +33,7 @@ namespace WebApp.Controllers
         }
 
         // GET: ArticuloController
+        [AdminAutorizado]
         public IActionResult Index(string mensaje)
         {
             ViewBag.mensaje = mensaje;
@@ -44,12 +46,14 @@ namespace WebApp.Controllers
         //    return View();
         //}
 
+        [AdminAutorizado]
         // GET: ArticuloController/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        [AdminAutorizado]
         // POST: ArticuloController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -11,6 +11,7 @@ namespace LogicaNegocio.Entidades
         public Cliente Cliente { get; set; }
         public List<Linea> Lineas { get; set; }
         public DateTime FechaRecibido { get; set; }
+        public double MontoTotal { get; set; }
         public bool Anulado { get; set; } = false;
         public double Recargo { get; set; }
 
