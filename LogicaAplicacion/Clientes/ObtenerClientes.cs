@@ -23,6 +23,6 @@ namespace LogicaAplicacion.Clientes
                 return _repositorioCliente.GetAll();
             }
 
-        }
     }
 }
+

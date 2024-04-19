@@ -40,22 +40,16 @@ namespace LogicaAccesoDatos.EF
             throw new NotImplementedException();
         }
 
-        //public IEnumerable<Cliente> GetByMonto(int monto)
-        //{
-        //    return _context.Clientes.
-        //        Include(cliente => cliente.Pedidos).
-        //}
+        public IEnumerable<Cliente> GetByMonto(int monto)
+        {
+            throw new NotImplementedException();
+        }
 
 
         public void Update(int id, Cliente obj)
         {
             throw new NotImplementedException();
         }
-
-        //public IEnumerable<Usuario> GetByMonto(int monto)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public IEnumerable<Cliente> GetByString(string dato) 
         {
