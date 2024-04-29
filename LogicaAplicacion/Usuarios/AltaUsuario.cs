@@ -6,7 +6,7 @@ using LogicaNegocio.CarpetaDtos;
 
 namespace LogicaAplicacion.Usuarios
 {
-    public class AltaUsuario : IAlta<UsuarioDto>
+    public class AltaUsuario : IAlta<AdminDto>
     {
         IRepositorioUsuario _repositorioUsuario;
 
@@ -15,10 +15,10 @@ namespace LogicaAplicacion.Usuarios
             _repositorioUsuario = repositorioUsuario;
         }
 
-        public void Ejecutar (UsuarioDto usuarioDto)
+        public void Ejecutar (AdminDto adminDto)
         {
-            Usuario usuario = UsuarioMappers.FromDto(usuarioDto);
-            _repositorioUsuario.Add(usuario);
+            Administrador admin = AdminMapper.FromDto(adminDto);
+            _repositorioUsuario.Add(admin);
         }
     }
 }

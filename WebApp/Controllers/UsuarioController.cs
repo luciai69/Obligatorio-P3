@@ -143,9 +143,16 @@ namespace WebApp.Controllers
             }
         }
 
-        public IActionResult Login(string Email, string Password)
+        public IActionResult Login()
         {
-            Usuario unUsuario = _obtenerUsuarioPorDosString.Ejecutar(Email, Password);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string Mail, string Contrasenia)
+        {
+            Usuario unUsuario = _obtenerUsuarioPorDosString.Ejecutar(Mail, Contrasenia);
+
             try
             {
                 if(unUsuario == null)

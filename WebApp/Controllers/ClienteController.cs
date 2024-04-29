@@ -6,11 +6,11 @@ using WebApp.Filter;
 
 namespace WebApp.Controllers
 {
-    public class ClienteController(IObtenerTodos<Cliente> obtenerTodos, IObtenerPorString<Cliente> obtenerPorString, IObtenerPorInt<Cliente> obtenerPorInt) : Controller
+    public class ClienteController(IObtenerTodos<ClienteDto> obtenerTodos, IObtenerPorString<ClienteDto> obtenerPorString, IObtenerPorInt<ClienteDto> obtenerPorInt) : Controller
     {
-        IObtenerTodos<Cliente> _obtenerClientes = obtenerTodos;
-        IObtenerPorString<Cliente> _obtenerPorString = obtenerPorString;
-        IObtenerPorInt<Cliente> _obtenerPorInt = obtenerPorInt;
+        IObtenerTodos<ClienteDto> _obtenerClientes = obtenerTodos;
+        IObtenerPorString<ClienteDto> _obtenerPorString = obtenerPorString;
+        IObtenerPorInt<ClienteDto> _obtenerPorInt = obtenerPorInt;
 
         public IActionResult Index(string mensaje)
         {
@@ -24,6 +24,7 @@ namespace WebApp.Controllers
             return View("Index", _obtenerPorString.Ejecutar(rut));
         }
 
+        [AdminAutorizado]
         public IActionResult ObtenerPorMonto(int monto)
         {
             return View("Index", _obtenerPorInt.Ejecutar(monto));

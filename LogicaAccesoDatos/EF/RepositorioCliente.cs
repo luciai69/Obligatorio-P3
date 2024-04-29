@@ -32,7 +32,9 @@ namespace LogicaAccesoDatos.EF
 
         public IEnumerable<Cliente> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Clientes.
+                AsEnumerable().
+                ToList();
         }
 
         public Cliente GetById(int id)
@@ -44,7 +46,7 @@ namespace LogicaAccesoDatos.EF
         {
             var clientes = _context.Clientes
                 .Where(cli => cli.Pedidos
-                .Any(ped => ped.MontoTotal == monto))
+                .Any(ped => ped.MontoTotal >= monto))
                 .OrderBy(cli => cli.Rut);
             return clientes.ToList();
         }

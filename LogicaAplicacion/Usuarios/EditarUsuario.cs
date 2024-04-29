@@ -17,7 +17,7 @@ namespace LogicaAplicacion.Usuarios
 
         public void Ejecutar(int id, UsuarioDto obj)
         {
-            Usuario usuario = UsuarioMappers.FromDto(obj);
+            Usuario usuario = UsuarioMapper.FromDto(obj);
 
             _repositorioUsuario.Update(id, usuario);
         }

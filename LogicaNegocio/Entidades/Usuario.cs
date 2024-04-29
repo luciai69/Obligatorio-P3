@@ -8,7 +8,7 @@ namespace LogicaNegocio.Entidades
     {
         public int Id { get; set; }
         public string Mail { get; set; }
-        public required NombreCompleto NombreCompleto { get; set; }
+        public NombreCompleto NombreCompleto { get; set; }
         public string Contrasenia { get; set; }
         public string Discriminator { get; set; }
 

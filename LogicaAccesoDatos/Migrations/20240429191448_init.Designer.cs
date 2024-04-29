@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoDatos.Migrations
 {
     [DbContext(typeof(PapeleriaContext))]
-    [Migration("20240414154343_init")]
+    [Migration("20240429191448_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -130,6 +130,9 @@ namespace LogicaAccesoDatos.Migrations
 
                     b.Property<DateTime>("FechaRecibido")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("MontoTotal")
+                        .HasColumnType("float");
 
                     b.Property<double>("Recargo")
                         .HasColumnType("float");
@@ -252,7 +255,7 @@ namespace LogicaAccesoDatos.Migrations
             modelBuilder.Entity("LogicaNegocio.Entidades.Pedido", b =>
                 {
                     b.HasOne("LogicaNegocio.Entidades.Cliente", "Cliente")
-                        .WithMany()
+                        .WithMany("Pedidos")
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -287,6 +290,11 @@ namespace LogicaAccesoDatos.Migrations
 
                     b.Navigation("NombreCompleto")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LogicaNegocio.Entidades.Cliente", b =>
+                {
+                    b.Navigation("Pedidos");
                 });
 
             modelBuilder.Entity("LogicaNegocio.Entidades.Pedido", b =>

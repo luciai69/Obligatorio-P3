@@ -72,6 +72,7 @@ namespace LogicaAccesoDatos.Migrations
                     FechaRealizado = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
                     FechaRecibido = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MontoTotal = table.Column<double>(type: "float", nullable: false),
                     Anulado = table.Column<bool>(type: "bit", nullable: false),
                     Recargo = table.Column<double>(type: "float", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false)

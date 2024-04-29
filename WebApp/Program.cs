@@ -26,7 +26,7 @@ namespace WebApp
 
             // CASOS DE USO
             //Usuarios
-            builder.Services.AddScoped<IAlta<UsuarioDto>, AltaUsuario>();
+            builder.Services.AddScoped<IAlta<AdminDto>, AltaUsuario>();
             builder.Services.AddScoped<IEditar<UsuarioDto>, EditarUsuario>();
             builder.Services.AddScoped<IEliminar<Usuario>, EliminarUsuario>();
             builder.Services.AddScoped<IObtener<UsuarioDto>, ObtenerUsuario>();
@@ -35,7 +35,10 @@ namespace WebApp
 
 
             //Clientes
-            builder.Services.AddScoped<IObtenerTodos<Cliente>, ObtenerClientes>();
+            builder.Services.AddScoped<IObtenerTodos<ClienteDto>, ObtenerClientes>();
+            builder.Services.AddScoped<IObtenerPorString<ClienteDto>, ObtenerPorString>();
+            builder.Services.AddScoped<IObtenerPorInt<ClienteDto>, ObtenerPorInt>();
+
             //Articulos
             builder.Services.AddScoped<IAlta<Articulo>, AltaArticulo>();
             builder.Services.AddScoped<IObtenerTodos<Articulo>, ObtenerArticulos>();

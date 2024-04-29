@@ -17,7 +17,7 @@ namespace LogicaAplicacion.Usuarios
 
         public UsuarioDto Ejecutar(int id)
         {
-            UsuarioDto usuarioDto = UsuarioMappers.ToDto(_repositorioUsuario.GetById(id));
+            UsuarioDto usuarioDto = UsuarioMapper.ToDto(_repositorioUsuario.GetById(id));
             return usuarioDto;
         }
     }

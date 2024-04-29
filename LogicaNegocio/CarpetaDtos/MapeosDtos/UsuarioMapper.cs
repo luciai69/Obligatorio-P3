@@ -4,7 +4,7 @@ using LogicaNegocio.ValueObjects;
 
 namespace LogicaNegocio.CarpetaDtos.MapeosDtos
 {
-    public class UsuarioMappers
+    public class UsuarioMapper
     {
         public static Usuario FromDto(UsuarioDto usuarioDto)
         {
@@ -28,7 +28,7 @@ namespace LogicaNegocio.CarpetaDtos.MapeosDtos
             List<UsuarioDto> aux = new List<UsuarioDto>();
             foreach (var usuario in usuarios)
             {
-                UsuarioDto usuarioDto = UsuarioMappers.ToDto(usuario);
+                UsuarioDto usuarioDto = UsuarioMapper.ToDto(usuario);
                 aux.Add(usuarioDto);
             }
             return aux;

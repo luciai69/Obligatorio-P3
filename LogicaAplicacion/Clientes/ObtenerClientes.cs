@@ -1,27 +1,26 @@
-﻿using LogicaNegocio.Entidades;
+﻿using LogicaAccesoDatos.EF;
+using LogicaNegocio.CarpetaDtos;
+using LogicaNegocio.CarpetaDtos.MapeosDtos;
+using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorio;
 using LogicaNegocio.InterfacesServicios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace LogicaAplicacion.Clientes
 {
-    public class ObtenerClientes : IObtenerTodos<Cliente> //TODO Hay que hacer ClienteDTO
+    public class ObtenerClientes : IObtenerTodos<ClienteDto>
         {
             IRepositorioCliente _repositorioCliente;
 
             public ObtenerClientes(IRepositorioCliente repositorioCliente)
             {
                 _repositorioCliente = repositorioCliente;
-            }
-
-            public IEnumerable<Cliente> Ejecutar()
-            {
-                return _repositorioCliente.GetAll();
-            }
+        }
+        public IEnumerable<ClienteDto> Ejecutar()
+        {
+            IEnumerable<ClienteDto> clientesDto = ClienteMapper.ToListaDto(_repositorioCliente.GetAll());
+            return clientesDto;
+        }
 
     }
 }

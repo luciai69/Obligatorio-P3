@@ -1,16 +1,14 @@
 ﻿using LogicaAccesoDatos.EF;
+using LogicaNegocio.CarpetaDtos;
+using LogicaNegocio.CarpetaDtos.MapeosDtos;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorio;
 using LogicaNegocio.InterfacesServicios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace LogicaAplicacion.Clientes
 {
-    public class ObtenerPorString : IObtenerPorString<Cliente>
+    public class ObtenerPorString : IObtenerPorString<ClienteDto>
     {
         IRepositorioCliente _repositorioCliente;
 
@@ -19,9 +17,11 @@ namespace LogicaAplicacion.Clientes
             _repositorioCliente = repositorioCliente;
         }
 
-        public IEnumerable<Cliente> Ejecutar(string dato)
+        public IEnumerable<ClienteDto> Ejecutar(string dato)
         {
-            return _repositorioCliente.GetByString(dato);
+            IEnumerable<ClienteDto> clientesDtoPorString = ClienteMapper.ToListaDto(_repositorioCliente.GetByString(dato));
+
+            return clientesDtoPorString;
         }
     }
 }
