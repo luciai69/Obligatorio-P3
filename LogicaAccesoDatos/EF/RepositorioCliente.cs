@@ -42,7 +42,11 @@ namespace LogicaAccesoDatos.EF
 
         public IEnumerable<Cliente> GetByMonto(int monto)
         {
-            throw new NotImplementedException();
+            var clientes = _context.Clientes
+                .Where(cli => cli.Pedidos
+                .Any(ped => ped.MontoTotal == monto))
+                .OrderBy(cli => cli.Rut);
+            return clientes.ToList();
         }
 
 
