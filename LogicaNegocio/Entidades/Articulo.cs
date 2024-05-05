@@ -23,7 +23,7 @@ namespace LogicaNegocio.Entidades
 
         private void ValidarNombre() 
         {
-            if (string.IsNullOrEmpty(Nombre) || Nombre.Length > 200 || Nombre.Length < 10) // TODO VALIDAR QUE NO SE REPITA
+            if (string.IsNullOrEmpty(Nombre) || Nombre.Length > ParametrosGenerales.MaxLargoArticulo || Nombre.Length < ParametrosGenerales.MinLargoArticulo) // TODO VALIDAR QUE NO SE REPITA
             {
                 throw new NombreArticuloInvalidaException();
             }

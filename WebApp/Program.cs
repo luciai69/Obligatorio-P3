@@ -6,6 +6,7 @@ using LogicaNegocio.InterfacesRepositorio;
 using LogicaNegocio.CarpetaDtos;
 using LogicaAplicacion.Usuarios;
 using LogicaAplicacion.Clientes;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApp
 {
@@ -49,9 +50,22 @@ namespace WebApp
             builder.Services.AddScoped<IObtener<Articulo>, ObtenerArticulo>();
 
             // inyecta el contexto 
-            builder.Services.AddDbContext<PapeleriaContext>();
+            builder.Services.AddDbContext<PapeleriaContext>(
+                options => options.UseSqlServer
+                (builder.Configuration.GetConnectionString("papeleria")));
 
             builder.Services.AddSession();
+
+            //Lee json con parametros generales
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("parametrosgenerales.json", optional: true, reloadOnChange: true)
+                .Build();
+            ParametrosGenerales.Iva = config.GetValue<int>("Iva");
+            ParametrosGenerales.MaxLargoArticulo = config.GetValue<int>("MaxLargoArticulo");
+            ParametrosGenerales.MinLargoArticulo = config.GetValue<int>("MinLargoArticulo");
+
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

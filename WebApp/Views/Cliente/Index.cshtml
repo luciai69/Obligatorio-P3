@@ -14,14 +14,14 @@
 <div>
     <form action="/cliente/ObtenerPorRut">
         <input type="text" name="rut" placeholder="Ingrese RUT a buscar">
-        <button type="submit">Buscar</button>
+        <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 </div>
-
+<br />
 <div>
     <form action="/cliente/ObtenerPorMonto">
         <input type="number" name="monto" placeholder="Ingrese monto a buscar">
-        <button type="submit">Buscar</button>
+        <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 </div>
 
@@ -32,14 +32,26 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RazonSoc)
+                Razon Social
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rut)
+                RUT
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calle)
+            </th>
+            <th>
+                Numero
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ciudad)
+            </th>
+            <th>
+                Dist (km)
+            </th>
         </tr>
     </thead>
+
     <tbody>
 @foreach (var item in Model) {
         <tr>
@@ -51,6 +63,18 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Num)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ciudad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistanciaPapeleria)
             </td>
         </tr>
 }

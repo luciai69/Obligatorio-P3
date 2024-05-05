@@ -17,7 +17,7 @@ namespace LogicaAccesoDatos.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -128,7 +128,7 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<DateTime>("FechaRecibido")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("MontoTotal")
+                    b.Property<double>("MontoSubtotal")
                         .HasColumnType("float");
 
                     b.Property<double>("Recargo")
@@ -164,9 +164,12 @@ namespace LogicaAccesoDatos.Migrations
 
                     b.Property<string>("Mail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Mail")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
 

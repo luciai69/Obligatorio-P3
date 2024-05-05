@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Entidades;
+﻿using LogicaAccesoDatos.EF.Config;
+using LogicaNegocio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -18,32 +19,22 @@ namespace LogicaAccesoDatos.EF
 
 
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = papeleria; Integrated Security = True");
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //    {
+        //        base.OnConfiguring(optionsBuilder);
+        //        optionsBuilder.UseSqlServer(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = papeleria; Integrated Security = True");
 
-        }
+        //    }
+        public PapeleriaContext(DbContextOptions<PapeleriaContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.ApplyConfiguration(new PedidoConfig());
+            modelBuilder.ApplyConfiguration(new ClienteConfig());
+            modelBuilder.ApplyConfiguration(new UsuarioConfig());
+
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Usuario>().OwnsOne(u => u.NombreCompleto, nom =>
-            {
-                nom.Property(n => n.Nombre).HasColumnName("NombreCompleto_nombre");
-                nom.Property(n => n.Apellido).HasColumnName("NombreCompleto_apellido");
-            }
-          );
-
-            modelBuilder.Entity<Cliente>().OwnsOne(c => c.Direccion, dir =>
-            {
-                dir.Property(d => d.Calle).HasColumnName("Direccion_calle");
-                dir.Property(d => d.Num).HasColumnName("Direccion_num");
-                dir.Property(d => d.Ciudad).HasColumnName("Direccion_ciudad");
-                dir.Property(d => d.DistanciaPapeleria).HasColumnName("Direccion_distPapeleria");
-            }
-          );
         }
     }
 }

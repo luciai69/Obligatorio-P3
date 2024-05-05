@@ -17,16 +17,6 @@
     </div>
 }
 
-<div class="input-group">
-    <div class="form-outline" data-mdb-input-init>
-        <input type="search" id="form1" class="form-control" />
-        <label class="form-label" for="form1">Search</label>
-    </div>
-    <button type="button" class="btn btn-primary" data-mdb-ripple-init>
-        <i class="fas fa-search"></i>
-    </button>
-</div>
-
 <table class="table">
     <thead>
         <tr>
@@ -71,11 +61,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

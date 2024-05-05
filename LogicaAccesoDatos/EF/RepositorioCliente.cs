@@ -46,7 +46,7 @@ namespace LogicaAccesoDatos.EF
         {
             var clientes = _context.Clientes
                 .Where(cli => cli.Pedidos
-                .Any(ped => ped.MontoTotal >= monto))
+                .Any(ped => ped.MontoSubtotal >= monto))
                 .OrderBy(cli => cli.Rut);
             return clientes.ToList();
         }

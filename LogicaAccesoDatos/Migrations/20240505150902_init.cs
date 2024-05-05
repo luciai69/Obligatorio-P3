@@ -52,7 +52,7 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Mail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mail = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NombreCompleto_nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NombreCompleto_apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Contrasenia = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -72,7 +72,7 @@ namespace LogicaAccesoDatos.Migrations
                     FechaRealizado = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
                     FechaRecibido = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MontoTotal = table.Column<double>(type: "float", nullable: false),
+                    MontoSubtotal = table.Column<double>(type: "float", nullable: false),
                     Anulado = table.Column<bool>(type: "bit", nullable: false),
                     Recargo = table.Column<double>(type: "float", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false)
@@ -129,6 +129,12 @@ namespace LogicaAccesoDatos.Migrations
                 name: "IX_Pedidos_ClienteId",
                 table: "Pedidos",
                 column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_Mail",
+                table: "Usuarios",
+                column: "Mail",
+                unique: true);
         }
 
         /// <inheritdoc />

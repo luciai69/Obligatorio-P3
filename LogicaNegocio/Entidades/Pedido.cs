@@ -9,11 +9,14 @@ namespace LogicaNegocio.Entidades
         public int Id { get; set; }
         public DateTime FechaRealizado { get; set; }
         public Cliente Cliente { get; set; }
+        public int ClienteId { get; set; }
         public List<Linea> Lineas { get; set; }
         public DateTime FechaRecibido { get; set; }
-        public double MontoTotal { get; set; }
+        public double MontoSubtotal { get; set; }
         public bool Anulado { get; set; } = false;
         public double Recargo { get; set; }
+        public string Discriminator { get; set; }
+
 
         public void Validar()
         {

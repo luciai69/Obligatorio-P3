@@ -12,23 +12,23 @@ namespace WebApp.Controllers
     {
 
         IAlta<Articulo> _altaArticulo;
-        IEditar<Articulo> _editarArticulo;
-        IEliminar<Articulo> _eliminarArticulo;
-        IObtener<Articulo> _obtenerArticulo;
+        //IEditar<Articulo> _editarArticulo;
+        //IEliminar<Articulo> _eliminarArticulo;
+        //IObtener<Articulo> _obtenerArticulo;
         IObtenerTodos<Articulo> _obtenerArticulos;
 
         public ArticuloController(
             IAlta<Articulo> altaArticulo,
-            IEditar<Articulo> editarArticulo,
-            IEliminar<Articulo> eliminarArticulo,
-            IObtener<Articulo> obtenerArticulo,
+            //IEditar<Articulo> editarArticulo,
+            //IEliminar<Articulo> eliminarArticulo,
+            //IObtener<Articulo> obtenerArticulo,
             IObtenerTodos<Articulo> obtenerArticulos
             )
         {
             _altaArticulo = altaArticulo;
-            _editarArticulo = editarArticulo;
-            _eliminarArticulo = eliminarArticulo;
-            _obtenerArticulo = obtenerArticulo;
+            //_editarArticulo = editarArticulo;
+            //_eliminarArticulo = eliminarArticulo;
+            //_obtenerArticulo = obtenerArticulo;
             _obtenerArticulos = obtenerArticulos;
         }
 

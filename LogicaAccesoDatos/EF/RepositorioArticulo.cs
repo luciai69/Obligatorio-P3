@@ -20,6 +20,21 @@ namespace LogicaAccesoDatos.EF
                 throw new ArgumentNullRepositorioException();
             }
             obj.Validar();
+            
+            Articulo obj2 = GetByName(obj.Nombre);
+
+            if (obj2 != null)
+            {
+                throw new ArgumentNullRepositorioException(); //TODO Crear nuevas exceptions para nombre y cod repetidos
+            }
+
+            Articulo obj3 = GetByCodigo(obj.Codigo);
+            
+            if(obj3 != null)
+            {
+                throw new ArgumentNullRepositorioException();
+            }
+
             _context.Articulos.Add(obj);
             _context.SaveChanges();
         }
@@ -44,6 +59,11 @@ namespace LogicaAccesoDatos.EF
         public Articulo GetById(int id)
         {
             return _context.Articulos.FirstOrDefault(articulo => articulo.Id == id);
+        }
+
+        public Articulo GetByCodigo(string num)
+        {
+            return _context.Articulos.FirstOrDefault(articulo => articulo.Codigo == num);
         }
 
         public Articulo GetByName(string name) //TODO Como uso esto para el validar?
