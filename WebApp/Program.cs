@@ -49,6 +49,9 @@ namespace WebApp
             builder.Services.AddScoped<IEliminar<Articulo>, EliminarArticulo>();
             builder.Services.AddScoped<IObtener<Articulo>, ObtenerArticulo>();
 
+            //Pedido
+            builder.Services.AddScoped<IObtenerTodos<ArticuloDto>, ObtenerArticulos>();
+
             // inyecta el contexto 
             builder.Services.AddDbContext<PapeleriaContext>(
                 options => options.UseSqlServer
@@ -63,8 +66,7 @@ namespace WebApp
             ParametrosGenerales.Iva = config.GetValue<int>("Iva");
             ParametrosGenerales.MaxLargoArticulo = config.GetValue<int>("MaxLargoArticulo");
             ParametrosGenerales.MinLargoArticulo = config.GetValue<int>("MinLargoArticulo");
-
-
+            ParametrosGenerales.Plazo = config.GetValue<int>("Plazo");
 
             var app = builder.Build();
 

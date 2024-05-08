@@ -1,6 +1,7 @@
 {
   "MaxLargoArticulo": 200,
   "MinLargoArticulo": 10,
-  "Iva": 22
+  "Iva": 22,
+  "Plazo" : 5
 }
 

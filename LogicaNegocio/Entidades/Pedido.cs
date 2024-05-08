@@ -4,25 +4,25 @@ using LogicaNegocio.InterfacesDominio;
 
 namespace LogicaNegocio.Entidades
 {
-    public class Pedido : IEntity, IValidable
+    public abstract class Pedido : IEntity, IValidable
     {
         public int Id { get; set; }
         public DateTime FechaRealizado { get; set; }
         public Cliente Cliente { get; set; }
         public int ClienteId { get; set; }
         public List<Linea> Lineas { get; set; }
-        public DateTime FechaRecibido { get; set; }
+        public DateTime FechaEntrega { get; set; }
         public double MontoSubtotal { get; set; }
+        public double MontoTotal { get; set; }
+        public int Cantidad { get; set; }
         public bool Anulado { get; set; } = false;
-        public double Recargo { get; set; }
         public string Discriminator { get; set; }
 
 
         public void Validar()
         {
             ValidarFechaRealizado();
-            ValidarFechaRecibido();
-            ValidarRecargo();
+            ValidarFechaEntrega();
             ValidarLinea();
             ValidarCliente();
         }
@@ -35,24 +35,11 @@ namespace LogicaNegocio.Entidades
             }
         }
 
-        private void ValidarFechaRecibido() 
+        public virtual void ValidarFechaEntrega()
         {
-            if (FechaRecibido < FechaRealizado) 
+            if (FechaEntrega < FechaRealizado) 
             {
                 throw new FechaRecibidoPedidoInvalidaException();
-            }
-        }
-
-        //private void ValidarAnulado() 
-        //{
-
-        //}
-
-        private void ValidarRecargo() 
-        {
-            if (Recargo < 0) 
-            {
-                throw new RecardoPedidoInvalidaException();
             }
         }
 
@@ -71,5 +58,20 @@ namespace LogicaNegocio.Entidades
                 throw new ClientePedidoInvalidaException();
             }
         }
+
+        public void CaluclarSubtotal()
+        {
+            double subtotal = 0;
+
+            foreach(Linea linea in Lineas)
+            {
+                subtotal += linea.CalcularPrecio();
+            }
+
+            MontoSubtotal = subtotal;
+        }
+
+        public abstract void CalcularRecargo();
+        
     }
 }

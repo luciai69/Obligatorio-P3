@@ -8,6 +8,7 @@ namespace LogicaNegocio.Entidades
     {
         public int Id { get; set; }
         public Articulo Articulo { get; set; }
+        public int ArticuloId { get; set; }
         public int CantUnidades { get; set; }
         public double PrecioUnitarioVigente { get; set; }
 
@@ -15,6 +16,7 @@ namespace LogicaNegocio.Entidades
         {
             ValidarArticulo();
             ValidarCantidad();
+            ValidarPrecio();
         }
 
         private void ValidarArticulo() 
@@ -39,6 +41,11 @@ namespace LogicaNegocio.Entidades
             {
                 throw new PrecioLineaInvalidaException();
             }
+        }
+
+        public double CalcularPrecio()
+        {
+            return CantUnidades * PrecioUnitarioVigente;
         }
     }
 }
