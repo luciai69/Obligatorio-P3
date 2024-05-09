@@ -27,7 +27,7 @@ namespace LogicaNegocio.CarpetaDtos.MapeosDtos
 
         public static PedidoExpressDto ToDto(PedidoExpress pedidoExpress)
         {
-            return new PedidoExpressDto(pedidoExpress.Id, pedidoExpress.FechaRealizado, pedidoExpress.ClienteId, pedidoExpress.FechaEntrega, pedidoExpress.MontoSubtotal, pedidoExpress.Cantidad, pedidoExpress.Discriminator);
+            return new PedidoExpressDto(pedidoExpress.Id, pedidoExpress.FechaRealizado, pedidoExpress.ClienteId, pedidoExpress.FechaEntrega, pedidoExpress.MontoTotal, pedidoExpress.Cantidad, pedidoExpress.Discriminator);
         }
 
         public static IEnumerable<PedidoExpressDto> ToListaDto(IEnumerable<PedidoExpress> pedidos)

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<LogicaNegocio.CarpetaDtos.ArticuloDto>
+﻿@using LogicaNegocio.CarpetaDtos
+@model IEnumerable<LogicaNegocio.CarpetaDtos.ArticuloDto>
 
 @{
     ViewData["Title"] = "Catalogo";
@@ -25,6 +26,7 @@
 <div>
     <form method="post" action="Checkout">
         <input type="text" name="IdCliente" placeholder="Id del cliente" />
+        <input type="date" name="fechaEntrega" placeholder="Fecha de entrega (yyyy-mm-dd)" />
         <button type="submit">Comprar</button>
     </form>
 
@@ -34,7 +36,7 @@
 
 <div>
     Cantidad de Item: @ViewBag.cantidad
-    Monto Total: @ViewBag.total
+    Monto Subtotal: @ViewBag.total
 </div>
 
 <table class="table">
@@ -83,7 +85,7 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
                 <td>
-                    <form action="AgregarItem" method="post">
+                    <form action="AgregarLinea" method="post">
                         <input type="int" name="idArticulo" value="@item.Id" hidden />
                         <input type="number" name="cantidad" class="form-control" />
                         <button type="submit" class="btn btn-primary">Agregar</button>
@@ -98,30 +100,57 @@
 {
     <div id="catalogo" style="display:none">
 
-        <h2>Productos seleccionados</h2>
 
         <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Num Linea
+                    </th>
+                    <th>
+                        Id Articulo
+                    </th>
+                    <th>
+                        Nombre 
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>
+                    <th>
+                        Codigo
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Precio Unidad
+                    </th>
+                </tr>
+            </thead>
             <tbody>
                 @foreach (LineaDto linea in ViewBag.catalogo)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Id)
+                            @Html.DisplayFor(modelItem => linea.Id)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Descripcion)
+                            @Html.DisplayFor(modelItem => linea.ArticuloId)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Discriminator)
+                            @Html.DisplayFor(modelItem => linea.Nombre)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.NombreTema)
+                            @Html.DisplayFor(modelItem => linea.Descripcion)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Cantidad)
+                            @Html.DisplayFor(modelItem => linea.Codigo)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.PrecioSugerido)
+                            @Html.DisplayFor(modelItem => linea.CantUnidades)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.PrecioUnitarioVigente)
                         </td>
                     </tr>
                 }

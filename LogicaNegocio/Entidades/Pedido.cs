@@ -25,14 +25,12 @@ namespace LogicaNegocio.Entidades
             ValidarFechaEntrega();
             ValidarLinea();
             ValidarCliente();
+            CalcularRecargo();
         }
 
         private void ValidarFechaRealizado() 
         {
-            if (FechaRealizado > DateTime.Now) 
-            {
-                throw new FechaRealizadoPedidoInvalidaException();
-            }
+            FechaRealizado = DateTime.Now;
         }
 
         public virtual void ValidarFechaEntrega()
@@ -53,23 +51,23 @@ namespace LogicaNegocio.Entidades
 
         private void ValidarCliente() 
         {
-            if (Cliente == null) 
+            if (ClienteId <= 0) 
             {
                 throw new ClientePedidoInvalidaException();
             }
         }
 
-        public void CaluclarSubtotal()
-        {
-            double subtotal = 0;
+        //public void CaluclarSubtotal()
+        //{
+        //    double subtotal = 0;
 
-            foreach(Linea linea in Lineas)
-            {
-                subtotal += linea.CalcularPrecio();
-            }
+        //    foreach(Linea linea in Lineas)
+        //    {
+        //        subtotal += linea.CalcularPrecio();
+        //    }
 
-            MontoSubtotal = subtotal;
-        }
+        //    MontoSubtotal = subtotal;
+        //}
 
         public abstract void CalcularRecargo();
         

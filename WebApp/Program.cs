@@ -7,6 +7,7 @@ using LogicaNegocio.CarpetaDtos;
 using LogicaAplicacion.Usuarios;
 using LogicaAplicacion.Clientes;
 using Microsoft.EntityFrameworkCore;
+using LogicaAplicacion.Pedidos;
 
 namespace WebApp
 {
@@ -23,6 +24,7 @@ namespace WebApp
             builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
+            builder.Services.AddScoped<IRepositorioPedido, RepositorioPedido>();
 
 
             // CASOS DE USO
@@ -50,6 +52,8 @@ namespace WebApp
 
             //Pedido
             builder.Services.AddScoped<IObtener<Articulo>, ObtenerArticulo>();
+            builder.Services.AddScoped<IAlta<PedidoExpressDto>, AltaPedidoExpress>();
+
 
             // inyecta el contexto 
             builder.Services.AddDbContext<PapeleriaContext>(

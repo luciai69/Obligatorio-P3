@@ -1,5 +1,6 @@
 using LogicaAccesoDatos.EF;
 using LogicaAplicacion.Articulos;
+using LogicaNegocio.CarpetaDtos;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorio;
 using LogicaNegocio.InterfacesServicios;
@@ -17,7 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
 
 //casos de uso articulos
-builder.Services.AddScoped<IObtenerTodos<Articulo>, ObtenerArticulos>();
+builder.Services.AddScoped<IObtenerTodos<ArticuloDto>, ObtenerArticulos>();
 
 // inyecta el contexto 
 builder.Services.AddDbContext<PapeleriaContext>();

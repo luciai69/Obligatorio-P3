@@ -12,15 +12,18 @@ namespace WebApp.Controllers
         IObtener<Articulo> _obtenerArticulo;
         IObtenerTodos<ArticuloDto> _obtenerArticulos;
         IObtenerTodos<ClienteDto> _obtenerClientes;
+        IAlta<PedidoExpressDto> _altaPedidoExpress;
 
         public PedidoController(
             IObtener<Articulo> obtenerArticulo,
             IObtenerTodos<ArticuloDto> obtenerArticulos,
-            IObtenerTodos<ClienteDto> obtenerClientes)
+            IObtenerTodos<ClienteDto> obtenerClientes,
+            IAlta<PedidoExpressDto> altaPedidoExpress)
         {
             _obtenerArticulo = obtenerArticulo;
             _obtenerArticulos = obtenerArticulos;
             _obtenerClientes = obtenerClientes;
+            _altaPedidoExpress = altaPedidoExpress;
         }
 
 
@@ -49,14 +52,17 @@ namespace WebApp.Controllers
 
                 var linea = new LineaDto()
                 {
-                    Id = articulo.Id,
+                    ArticuloId = articulo.Id,
+                    Nombre = articulo.Nombre,
+                    Descripcion = articulo.Descripcion,
+                    Codigo = articulo.Codigo,
                     CantUnidades = cantidad,
                     PrecioUnitarioVigente = articulo.Precio
                 };//Esto se puede hacer en un metodo CrearLinea que reciba cant y articulo
 
                 pedidoDto.Lineas.Add(linea); //aca se llama al metodo
-                pedidoDto.Cantidad =+ cantidad;
-                pedidoDto.MontoSubtotal =+ articulo.Precio * cantidad;
+                pedidoDto.Cantidad += cantidad;
+                pedidoDto.MontoSubtotal += articulo.Precio * cantidad;
 
                 SetViewBag(pedidoDto);
                 SetPedidoToSession(pedidoDto);
@@ -69,6 +75,24 @@ namespace WebApp.Controllers
                 ViewBag.Mensaje = e.Message;
             }
             return View("Catalogo", _obtenerArticulos.Ejecutar());
+        }
+
+        public void Checkout(int IdCliente, DateTime fechaEntrega)
+        {
+            PedidoExpressDto pedidoExpressDto = GetPedidoFromSession();
+
+            if (pedidoExpressDto == null)
+            {
+                throw new Exception("No se pudo recuperar la compra");
+            }
+            pedidoExpressDto.ClienteId = IdCliente;
+            //DateTime dtFecha = DateTime.Parse(fechaEntrega);
+            pedidoExpressDto.FechaEntrega = fechaEntrega;
+            _altaPedidoExpress.Ejecutar(pedidoExpressDto);
+
+            ViewBag.MontoTotal = 
+            return View("Catalogo",)
+
         }
 
         private PedidoExpressDto GetPedidoFromSession()

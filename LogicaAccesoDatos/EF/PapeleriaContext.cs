@@ -15,7 +15,6 @@ namespace LogicaAccesoDatos.EF
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<PedidoComun> PedidosComunes { get; set; }
         public DbSet<PedidoExpress> PedidosExpress { get; set; }
-        public DbSet<Linea> Lineas { get; set; }
 
 
 

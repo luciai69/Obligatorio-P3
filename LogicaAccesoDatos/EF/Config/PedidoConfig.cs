@@ -13,7 +13,7 @@ namespace LogicaAccesoDatos.EF.Config
     {
         public void Configure(EntityTypeBuilder<Pedido> builder)
         {
-            builder.HasOne<Cliente>(ped => ped.Cliente)
+            builder.HasOne(ped => ped.Cliente)
             .WithMany(c => c.Pedidos)
             .HasForeignKey(c => c.ClienteId);
 

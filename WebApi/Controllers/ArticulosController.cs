@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Entidades;
+﻿using LogicaNegocio.CarpetaDtos;
+using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
@@ -12,11 +13,11 @@ namespace WebApi.Controllers
     {
 
        
-        IObtenerTodos<Articulo> _obtenerArticulos;
+        IObtenerTodos<ArticuloDto> _obtenerArticulos;
 
         public ArticulosController(
        
-            IObtenerTodos<Articulo> obtenerArticulos
+            IObtenerTodos<ArticuloDto> obtenerArticulos
             )
         {
             _obtenerArticulos = obtenerArticulos;
