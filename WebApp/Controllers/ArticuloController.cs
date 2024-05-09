@@ -1,4 +1,5 @@
 ﻿using LogicaAccesoDatos.Excepciones;
+using LogicaNegocio.CarpetaDtos;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.Excepciones.Articulo;
 using LogicaNegocio.InterfacesServicios;
@@ -11,18 +12,18 @@ namespace WebApp.Controllers
     public class ArticuloController : Controller
     {
 
-        IAlta<Articulo> _altaArticulo;
+        IAlta<ArticuloDto> _altaArticulo;
         //IEditar<Articulo> _editarArticulo;
         //IEliminar<Articulo> _eliminarArticulo;
         //IObtener<Articulo> _obtenerArticulo;
-        IObtenerTodos<Articulo> _obtenerArticulos;
+        IObtenerTodos<ArticuloDto> _obtenerArticulos;
 
         public ArticuloController(
-            IAlta<Articulo> altaArticulo,
+            IAlta<ArticuloDto> altaArticulo,
             //IEditar<Articulo> editarArticulo,
             //IEliminar<Articulo> eliminarArticulo,
             //IObtener<Articulo> obtenerArticulo,
-            IObtenerTodos<Articulo> obtenerArticulos
+            IObtenerTodos<ArticuloDto> obtenerArticulos
             )
         {
             _altaArticulo = altaArticulo;
@@ -57,11 +58,11 @@ namespace WebApp.Controllers
         // POST: ArticuloController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Articulo articulo)
+        public IActionResult Create(ArticuloDto articuloDto)
         {
             try
             {
-                _altaArticulo.Ejecutar(articulo);
+                _altaArticulo.Ejecutar(articuloDto);
                 return RedirectToAction("Index", new { mensaje = "Alta de artículo exitosa." });
             }
             catch (NombreArticuloInvalidaException e)
@@ -93,7 +94,7 @@ namespace WebApp.Controllers
                 ViewBag.Mensaje = "Hubo un error al crear el artículo. Por favor, intente nuevamente.";
             }
 
-            return View(articulo);
+            return View(articuloDto);
         }
 
         // GET: ArticuloController/Edit/5

@@ -10,7 +10,7 @@ namespace WebApp.Controllers
     public class PedidoController : Controller
     {
         IObtener<Articulo> _obtenerArticulo;
-        IObtenerTodos<Articulo> _obtenerArticulos;
+        IObtenerTodos<ArticuloDto> _obtenerArticulos;
         IObtenerTodos<ClienteDto> _obtenerClientes;
 
         public PedidoController(
@@ -52,9 +52,9 @@ namespace WebApp.Controllers
                     Id = articulo.Id,
                     CantUnidades = cantidad,
                     PrecioUnitarioVigente = articulo.Precio
-                };
+                };//Esto se puede hacer en un metodo CrearLinea que reciba cant y articulo
 
-                pedidoDto.Lineas.Add(linea);
+                pedidoDto.Lineas.Add(linea); //aca se llama al metodo
                 pedidoDto.Cantidad =+ cantidad;
                 pedidoDto.MontoSubtotal =+ articulo.Precio * cantidad;
 

@@ -4,7 +4,7 @@ using LogicaNegocio.InterfacesServicios;
 
 namespace LogicaAplicacion.Articulos
 {
-    public class ObtenerArticulo : IObtener<Articulo> // NO ES NECESARIO
+    public class ObtenerArticulo : IObtener<Articulo>
     {
         IRepositorioArticulo _repositorioArticulo;
 

@@ -1,6 +1,7 @@
 ﻿using LogicaNegocio.Excepciones.Usuario;
 using LogicaNegocio.InterfacesDominio;
 using LogicaNegocio.ValueObjects;
+using System.Net.Mail;
 
 namespace LogicaNegocio.Entidades
 {
@@ -20,10 +21,11 @@ namespace LogicaNegocio.Entidades
 
         private void ValidarMail() //TODO Validar que no se repita el mail.
         { 
-            if (string.IsNullOrEmpty(Mail))
+            if (string.IsNullOrEmpty(Mail) || !EsValido(Mail))
             {
                 throw new MailUsuarioInvalidaException();
             }
+            
         }
 
 
@@ -39,6 +41,22 @@ namespace LogicaNegocio.Entidades
             obj.Validar();
             NombreCompleto = obj.NombreCompleto;
             Contrasenia = obj.Contrasenia;
+        }
+
+        private static bool EsValido(string email)
+        {
+            var valido = true;
+
+            try
+            {
+                var emailAddress = new MailAddress(email);
+            }
+            catch
+            {
+                valido = false;
+            }
+
+            return valido;
         }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.CarpetaDtos.MapeosDtos
 {
-    internal class PedidoComunMapper
+    public class PedidoComunMapper
     {
-        public static PedidoComun FromDto(PedidoComun pedidoComunDto)
+        public static PedidoComun FromDto(PedidoComunDto pedidoComunDto)
         {
             return new PedidoComun()
             {

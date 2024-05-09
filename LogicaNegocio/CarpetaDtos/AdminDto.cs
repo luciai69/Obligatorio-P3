@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.CarpetaDtos
 {
-    public record AdminDto(int Id, string Nombre, string Apellido, string Mail, string Contrasenia, string Discriminator) //TODO No funciona DTO. Ver herencia con usuarios?
+    public record AdminDto(int Id, string Nombre, string Apellido, string Mail, string Contrasenia, string Discriminator)
     {
 
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.CarpetaDtos.MapeosDtos
 {
-    internal class PedidoExpressMapper
+    public class PedidoExpressMapper
     {
         public static PedidoExpress FromDto(PedidoExpressDto pedidoExpressDto)
         {

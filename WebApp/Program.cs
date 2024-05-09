@@ -41,16 +41,15 @@ namespace WebApp
             builder.Services.AddScoped<IObtenerPorInt<ClienteDto>, ObtenerPorInt>();
 
             //Articulos
-            builder.Services.AddScoped<IAlta<Articulo>, AltaArticulo>();
-            builder.Services.AddScoped<IObtenerTodos<Articulo>, ObtenerArticulos>();
+            builder.Services.AddScoped<IAlta<ArticuloDto>, AltaArticulo>();
+            builder.Services.AddScoped<IObtenerTodos<ArticuloDto>, ObtenerArticulos>();
 
             // estos no van creo, no son necesarios estos casos de uso segun la letra. preguntar al profe.
             builder.Services.AddScoped<IEditar<Articulo>,  EditarArticulo>();
             builder.Services.AddScoped<IEliminar<Articulo>, EliminarArticulo>();
-            builder.Services.AddScoped<IObtener<Articulo>, ObtenerArticulo>();
 
             //Pedido
-            builder.Services.AddScoped<IObtenerTodos<ArticuloDto>, ObtenerArticulos>();
+            builder.Services.AddScoped<IObtener<Articulo>, ObtenerArticulo>();
 
             // inyecta el contexto 
             builder.Services.AddDbContext<PapeleriaContext>(

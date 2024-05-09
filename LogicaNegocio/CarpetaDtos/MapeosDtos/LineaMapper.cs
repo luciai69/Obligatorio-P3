@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.CarpetaDtos.MapeosDtos
 {
-    internal class LineaMapper
+    public class LineaMapper
     {
         public static Linea FromDto(LineaDto lineaDto)
         {
             return new Linea()
             {
                 Id = lineaDto.Id,
+                ArticuloId = lineaDto.ArticuloId,
                 CantUnidades = lineaDto.CantUnidades,
                 PrecioUnitarioVigente = lineaDto.PrecioUnitarioVigente,
             };
@@ -22,7 +23,7 @@ namespace LogicaNegocio.CarpetaDtos.MapeosDtos
 
         public static LineaDto ToDto(Linea linea)
         {
-            return new LineaDto(linea.Id, linea.CantUnidades, linea.PrecioUnitarioVigente);
+            return new LineaDto(linea.Id, linea.ArticuloId, linea.Articulo.Nombre, linea.Articulo.Descripcion, linea.Articulo.Codigo, linea.CantUnidades, linea.PrecioUnitarioVigente);
 
         }
 
