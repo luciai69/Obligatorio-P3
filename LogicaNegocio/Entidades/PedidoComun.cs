@@ -20,7 +20,12 @@ namespace LogicaNegocio.Entidades
             if(Cliente.Direccion.DistanciaPapeleria > 100)
             {
                 MontoTotal = MontoSubtotal + (MontoSubtotal * 0.05);
+            }else
+            {
+                MontoTotal = MontoSubtotal;            
             }
+
+            MontoTotal = MontoTotal + (MontoTotal * (ParametrosGenerales.Iva / 100));
         }
     }
 }

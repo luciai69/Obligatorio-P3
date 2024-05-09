@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoDatos.Migrations
 {
     [DbContext(typeof(PapeleriaContext))]
-    [Migration("20240509161211_init")]
+    [Migration("20240509192845_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -160,6 +160,10 @@ namespace LogicaAccesoDatos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Contrasenia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContraseniaEncripada")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

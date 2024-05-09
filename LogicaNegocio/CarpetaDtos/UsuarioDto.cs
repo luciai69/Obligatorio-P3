@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.CarpetaDtos
 {
-    public record UsuarioDto(int Id, string Nombre, string Apellido, string Mail, string Contrasenia, string Discriminator)
+    public record UsuarioDto(int Id, string Nombre, string Apellido, string Mail, string Contrasenia, string ContraseniaEncriptada, string Discriminator)
     { 
         
     }

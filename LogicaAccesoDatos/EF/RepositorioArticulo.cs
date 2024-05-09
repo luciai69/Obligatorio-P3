@@ -25,14 +25,14 @@ namespace LogicaAccesoDatos.EF
 
             if (obj2 != null)
             {
-                throw new ArgumentNullRepositorioException(); //TODO Crear nuevas exceptions para nombre y cod repetidos
+                throw new InformacionRepetidaException(); 
             }
 
             Articulo obj3 = GetByCodigo(obj.Codigo);
             
             if(obj3 != null)
             {
-                throw new ArgumentNullRepositorioException();
+                throw new InformacionRepetidaException();
             }
 
             _context.Articulos.Add(obj);

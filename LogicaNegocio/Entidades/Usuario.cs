@@ -2,6 +2,8 @@
 using LogicaNegocio.InterfacesDominio;
 using LogicaNegocio.ValueObjects;
 using System.Net.Mail;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LogicaNegocio.Entidades
 {
@@ -11,17 +13,21 @@ namespace LogicaNegocio.Entidades
         public string Mail { get; set; }
         public NombreCompleto NombreCompleto { get; set; }
         public string Contrasenia { get; set; }
+        public string ContraseniaEncripada { get; set; }
         public string Discriminator { get; set; }
 
         public void Validar()
         {
             ValidarMail();
             ValidarContrasenia();
+            ContraseniaEncripada = EncodeStringToBase64(Contrasenia);
         }
 
         private void ValidarMail() //TODO Validar que no se repita el mail.
-        { 
-            if (string.IsNullOrEmpty(Mail) || !EsValido(Mail))
+        {
+            var valEmail = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+
+            if (string.IsNullOrEmpty(Mail) || !valEmail.IsMatch(Mail))
             {
                 throw new MailUsuarioInvalidaException();
             }
@@ -31,7 +37,9 @@ namespace LogicaNegocio.Entidades
 
         private void ValidarContrasenia() //TODO Validar los temas de formato
         {
-            if (string.IsNullOrEmpty(Contrasenia))
+            var valContrasenia = new Regex(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[,.!;]).{6,}$");
+
+            if (string.IsNullOrEmpty(Contrasenia) || !valContrasenia.IsMatch(Contrasenia))
             {
                 throw new ContraseniaUsuarioInvalidaException();
             }
@@ -41,22 +49,17 @@ namespace LogicaNegocio.Entidades
             obj.Validar();
             NombreCompleto = obj.NombreCompleto;
             Contrasenia = obj.Contrasenia;
+            ContraseniaEncripada = EncodeStringToBase64(Contrasenia);
         }
 
-        private static bool EsValido(string email)
+        public string EncodeStringToBase64(string stringToEncode)
         {
-            var valido = true;
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(stringToEncode));
+        }
 
-            try
-            {
-                var emailAddress = new MailAddress(email);
-            }
-            catch
-            {
-                valido = false;
-            }
-
-            return valido;
+        public string DecodeStringFromBase64(string stringToDecode)
+        {
+            return Encoding.UTF8.GetString(Convert.FromBase64String(stringToDecode));
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LogicaNegocio.ValueObjects
@@ -26,7 +27,8 @@ namespace LogicaNegocio.ValueObjects
 
         private void ValidarNombre()
         {
-            if (string.IsNullOrEmpty(Nombre))
+            var valNombre = new Regex(@"^(?![-\s])[a-zA-Z\s-]+(?<![-\s])$");
+            if (string.IsNullOrEmpty(Nombre) || !valNombre.IsMatch(Nombre))
             { 
                 throw new NombreNombreCompletoInvalidaException();
             }
@@ -34,7 +36,8 @@ namespace LogicaNegocio.ValueObjects
 
         private void ValidarApellido()
         {
-            if (string.IsNullOrEmpty(Apellido))
+            var valNombre = new Regex(@"^(?![-\s])[a-zA-Z\s-]+(?<![-\s])$");
+            if (string.IsNullOrEmpty(Apellido) || !valNombre.IsMatch(Apellido))
             {
                 throw new ApellidoNombreCompletoInvalidaException();
             }

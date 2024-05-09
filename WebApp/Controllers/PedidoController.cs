@@ -90,8 +90,8 @@ namespace WebApp.Controllers
             pedidoExpressDto.FechaEntrega = fechaEntrega;
             _altaPedidoExpress.Ejecutar(pedidoExpressDto);
 
-            ViewBag.MontoTotal = 
-            return View("Catalogo",)
+            //ViewBag.MontoTotal = 
+            //return View("Catalogo",)
 
         }
 

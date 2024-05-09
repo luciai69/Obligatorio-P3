@@ -14,13 +14,14 @@ namespace LogicaNegocio.CarpetaDtos.MapeosDtos
                 NombreCompleto = new NombreCompleto(usuarioDto.Nombre, usuarioDto.Apellido),
                 Mail = usuarioDto.Mail,
                 Contrasenia = usuarioDto.Contrasenia,
+                ContraseniaEncripada = usuarioDto.ContraseniaEncriptada,
                 Discriminator = usuarioDto.Discriminator,
             };
         }
 
         public static UsuarioDto ToDto(Usuario usuario)
         {
-            return new UsuarioDto(usuario.Id, usuario.NombreCompleto.Nombre, usuario.NombreCompleto.Apellido, usuario.Mail, usuario.Contrasenia, usuario.Discriminator);
+            return new UsuarioDto(usuario.Id, usuario.NombreCompleto.Nombre, usuario.NombreCompleto.Apellido, usuario.Mail, usuario.Contrasenia, usuario.ContraseniaEncripada, usuario.Discriminator);
         }
 
         public static IEnumerable<UsuarioDto> ToListaDto(IEnumerable<Usuario> usuarios)

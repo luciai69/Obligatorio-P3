@@ -56,6 +56,7 @@ namespace LogicaAccesoDatos.Migrations
                     NombreCompleto_nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NombreCompleto_apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Contrasenia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContraseniaEncripada = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false)
                 },
                 constraints: table =>

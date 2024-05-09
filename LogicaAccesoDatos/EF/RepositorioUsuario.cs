@@ -19,6 +19,10 @@ namespace LogicaAccesoDatos.EF
             {
                 throw new ArgumentNullRepositorioException();
             }
+            if(GetByEmail(obj.Mail) != null)
+            {
+                throw new InformacionRepetidaException();
+            }
             obj.Validar();
             _context.Usuarios.Add(obj);
             _context.SaveChanges();
@@ -45,7 +49,7 @@ namespace LogicaAccesoDatos.EF
 
         public Usuario Login(string email, string password)
         {
-            return _context.Usuarios.FirstOrDefault(usuario => usuario.Mail == email && usuario.Contrasenia == password);
+            return _context.Usuarios.FirstOrDefault(usuario => usuario.Mail == email && usuario.ContraseniaEncripada == password);
         }
 
         public Usuario GetById(int id)
@@ -53,7 +57,10 @@ namespace LogicaAccesoDatos.EF
             return _context.Usuarios.FirstOrDefault(usuario => usuario.Id == id);
         }
 
-        
+        public Usuario GetByEmail(string email)
+        {
+            return _context.Usuarios.FirstOrDefault(usuario => usuario.Mail == email);
+        }
         public void Update(int id, Usuario obj)
         {
             Usuario usuario = GetById(id);

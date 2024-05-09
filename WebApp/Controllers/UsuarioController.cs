@@ -5,6 +5,7 @@ using LogicaNegocio.Excepciones.Usuario;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 using WebApp.Filter;
 
 namespace WebApp.Controllers
@@ -61,7 +62,7 @@ namespace WebApp.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.Mensaje = "Hubo un error al crear usuario. Intente nuevamente.";
+                ViewBag.Mensaje = e.Message;
             }
 
             return View(adminDto);
@@ -151,7 +152,8 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult Login(string Mail, string Contrasenia)
         {
-            Usuario unUsuario = _obtenerUsuarioPorDosString.Ejecutar(Mail, Contrasenia);
+            string contraEncriptada = EncodeStringToBase64(Contrasenia);
+            Usuario unUsuario = _obtenerUsuarioPorDosString.Ejecutar(Mail, contraEncriptada);
 
             try
             {
@@ -169,11 +171,16 @@ namespace WebApp.Controllers
             }
             catch
             {
-                ViewBag.mensaje = "Pruebe de nuevo.";
+                ViewBag.Mensaje = "Pruebe de nuevo.";
             }
 
             return RedirectToAction("Index","Home");
 
+        }
+
+        public string EncodeStringToBase64(string stringToEncode)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(stringToEncode));
         }
 
         public IActionResult Logout()
