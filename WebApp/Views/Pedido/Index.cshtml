@@ -1,0 +1,73 @@
+﻿@model IEnumerable<LogicaNegocio.CarpetaDtos.PedidoDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pedidos</h1>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+
+<div>
+    <form action="/pedido/BuscarPorFecha">
+        <input type="date" name="fechaEntrega" placeholder="Fecha de entrega (yyyy-mm-dd)" />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    Fecha de Entrega
+                </th>
+                <th>
+                    Nombre Cliente
+                </th>
+                <th>
+                    Monto Total ($)
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaEntrega.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClienteNombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MontoTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Discriminator)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Anular", "Anular", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

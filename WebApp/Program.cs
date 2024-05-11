@@ -55,6 +55,8 @@ namespace WebApp
             builder.Services.AddScoped<IObtener<Cliente>, ObtenerCliente>();
             builder.Services.AddScoped<IAlta<PedidoExpressDto>, AltaPedidoExpress>();
             builder.Services.AddScoped<IAlta<PedidoComunDto>, AltaPedidoComun>();
+            builder.Services.AddScoped<IObtenerPorFecha<PedidoDto>, ObtenerPedidosPorFecha>();
+            builder.Services.AddScoped<IAnular<Pedido>, AnularPedido>();
 
 
             // inyecta el contexto 

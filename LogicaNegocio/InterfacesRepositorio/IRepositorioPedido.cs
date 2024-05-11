@@ -10,5 +10,7 @@ namespace LogicaNegocio.InterfacesRepositorio
     public interface IRepositorioPedido : IRepositorio<Pedido>
     {
         public IEnumerable<Pedido> GetByDate(DateTime dato);
+
+        public void Anular(int id);
     }
 }

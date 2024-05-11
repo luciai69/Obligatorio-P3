@@ -26,7 +26,7 @@ namespace LogicaNegocio.Entidades
                 MontoTotal = MontoSubtotal + (MontoSubtotal * 0.1);
             }
 
-            MontoTotal =+ MontoTotal * ((double)ParametrosGenerales.Iva/100);
+            MontoTotal += MontoTotal * ((double)ParametrosGenerales.Iva / 100);
         }
     }
 }

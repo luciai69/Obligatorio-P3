@@ -1,6 +1,7 @@
 ﻿using LogicaNegocio.Excepciones.Articulo;
 using LogicaNegocio.Excepciones.Pedido;
 using LogicaNegocio.InterfacesDominio;
+using LogicaNegocio.ValueObjects;
 
 namespace LogicaNegocio.Entidades
 {
@@ -34,7 +35,8 @@ namespace LogicaNegocio.Entidades
 
         public virtual void ValidarFechaEntrega()
         {
-            if (FechaEntrega < FechaRealizado) 
+            
+            if (FechaEntrega.Date < FechaRealizado.Date) 
             {
                 throw new FechaRecibidoPedidoInvalidaException();
             }
@@ -70,6 +72,10 @@ namespace LogicaNegocio.Entidades
         //}
 
         public abstract void CalcularRecargo();
-        
+
+        public void Anular()
+        {
+            Anulado = true;
+        }
     }
 }

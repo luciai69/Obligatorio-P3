@@ -7,8 +7,5 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.CarpetaDtos
 {
-    public record ClienteDto(int Id, string Rut, string RazonSoc, string Calle, string Num, string Ciudad, int DistanciaPapeleria)
-    {
-        public List<Pedido> Pedidos { get; set; }
-    }
+    public record ClienteDto(int Id, string Rut, string RazonSoc, string Calle, string Num, string Ciudad, int DistanciaPapeleria);
 }

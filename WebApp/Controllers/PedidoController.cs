@@ -1,4 +1,5 @@
 ﻿using LogicaAplicacion.Articulos;
+using LogicaAplicacion.Usuarios;
 using LogicaNegocio.CarpetaDtos;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.Excepciones.Pedido;
@@ -16,6 +17,9 @@ namespace WebApp.Controllers
         IObtenerTodos<ClienteDto> _obtenerClientes;
         IAlta<PedidoExpressDto> _altaPedidoExpress;
         IAlta<PedidoComunDto> _altaPedidoComun;
+        IObtenerPorFecha<PedidoDto> _obtenerPedidos;
+        IAnular<Pedido> _anularPedido;
+
 
         public PedidoController(
             IObtener<Articulo> obtenerArticulo,
@@ -23,7 +27,10 @@ namespace WebApp.Controllers
             IObtenerTodos<ArticuloDto> obtenerArticulos,
             IObtenerTodos<ClienteDto> obtenerClientes,
             IAlta<PedidoExpressDto> altaPedidoExpress,
-            IAlta<PedidoComunDto> altaPedidoComun)
+            IAlta<PedidoComunDto> altaPedidoComun,
+            IObtenerPorFecha<PedidoDto> obtenerPedidos,
+            IAnular<Pedido> anularPedido)
+            
         {
             _obtenerArticulo = obtenerArticulo;
             _obtenerCliente = obtenerCliente;
@@ -31,6 +38,8 @@ namespace WebApp.Controllers
             _obtenerClientes = obtenerClientes;
             _altaPedidoExpress = altaPedidoExpress;
             _altaPedidoComun = altaPedidoComun;
+            _obtenerPedidos = obtenerPedidos;
+            _anularPedido = anularPedido;
         }
 
 
@@ -228,6 +237,7 @@ namespace WebApp.Controllers
 
                 ViewBag.Error = false;
                 ViewBag.Mensaje = "Pedido realizado exitosamente.";
+
             }
             catch (Exception e)
             {
@@ -266,6 +276,34 @@ namespace WebApp.Controllers
             ViewBag.cantidad = pedidoComunDto.Cantidad;
             ViewBag.total = pedidoComunDto.MontoSubtotal;
             ViewBag.catalogo = pedidoComunDto.Lineas;
+        }
+
+        public IActionResult Index(string mensaje)
+        {
+            ViewBag.Mensaje = mensaje;
+            return View();
+        }
+        public IActionResult BuscarPorFecha(DateTime fechaEntrega)
+        {
+            return View("Index", _obtenerPedidos.Ejecutar(fechaEntrega));
+
+        }
+
+        public IActionResult Anular(int id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index", new { mensaje = "No se encontró el pedido " + id });
+            }
+            try
+            {
+                _anularPedido.Ejecutar(id);
+                return RedirectToAction("Index", new { mensaje = "Pedido anulado correctamente."});
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", new { mensaje = e.Message });
+            }
         }
     }
 }

@@ -19,7 +19,6 @@ namespace LogicaNegocio.CarpetaDtos.MapeosDtos
                 Rut = clienteDto.Rut,
                 RazonSoc = clienteDto.RazonSoc,
                 Direccion = new Direccion(clienteDto.Calle, clienteDto.Num, clienteDto.Ciudad, clienteDto.DistanciaPapeleria),
-                Pedidos = clienteDto.Pedidos
             };
         }
 
