@@ -19,7 +19,7 @@ namespace LogicaNegocio.Entidades
         {
             if(Cliente.Direccion.DistanciaPapeleria > 100)
             {
-                MontoTotal = MontoSubtotal + (MontoSubtotal * 0.05);
+                MontoTotal = MontoSubtotal + (MontoSubtotal * ((double)ParametrosGenerales.RecargoComunDistancia / 100));
             }else
             {
                 MontoTotal = MontoSubtotal;            

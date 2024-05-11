@@ -6,9 +6,11 @@ using LogicaNegocio.Excepciones.Pedido;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using WebApp.Filter;
 
 namespace WebApp.Controllers
 {
+    [AdminAutorizado]
     public class PedidoController : Controller
     {
         IObtener<Articulo> _obtenerArticulo;
@@ -129,7 +131,7 @@ namespace WebApp.Controllers
 
             }
 
-            return View("CatalogoComun", _obtenerArticulos.Ejecutar());
+            return View("CatalogoExpress", _obtenerArticulos.Ejecutar());
 
 
         }

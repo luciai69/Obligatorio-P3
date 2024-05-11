@@ -2,6 +2,9 @@
   "MaxLargoArticulo": 200,
   "MinLargoArticulo": 10,
   "Iva": 22,
-  "Plazo" : 5
+  "Plazo": 5,
+  "RecargoComunDistancia": 5,
+  "RecargoExpress": 10,
+  "RecargoExpressDia": 15
 }
 

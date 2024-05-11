@@ -183,6 +183,7 @@ namespace WebApp.Controllers
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(stringToEncode));
         }
 
+        [AdminAutorizado]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

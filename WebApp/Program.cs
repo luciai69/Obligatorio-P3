@@ -74,6 +74,9 @@ namespace WebApp
             ParametrosGenerales.MaxLargoArticulo = config.GetValue<int>("MaxLargoArticulo");
             ParametrosGenerales.MinLargoArticulo = config.GetValue<int>("MinLargoArticulo");
             ParametrosGenerales.Plazo = config.GetValue<int>("Plazo");
+            ParametrosGenerales.RecargoComunDistancia = config.GetValue<int>("RecargoComunDistancia");
+            ParametrosGenerales.RecargoExpressDia = config.GetValue<int>("RecargoExpressDia");
+            ParametrosGenerales.RecargoExpress = config.GetValue<int>("RecargoExpress");
 
             var app = builder.Build();
 

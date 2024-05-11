@@ -12,6 +12,7 @@ namespace WebApp.Controllers
         IObtenerPorString<ClienteDto> _obtenerPorString = obtenerPorString;
         IObtenerPorInt<ClienteDto> _obtenerPorInt = obtenerPorInt;
 
+        [AdminAutorizado]
         public IActionResult Index(string mensaje)
         {
             ViewBag.mensaje = mensaje;

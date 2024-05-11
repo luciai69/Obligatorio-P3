@@ -12,5 +12,9 @@ namespace LogicaNegocio.Entidades
         public static int MaxLargoArticulo { get; set; }
         public static int MinLargoArticulo { get; set; }
         public static int Plazo { get; set; }
-}
+        public static int RecargoComunDistancia { get; set; }
+        public static int RecargoExpress { get; set; }
+        public static int RecargoExpressDia{ get; set; }
+
+    }
 }

@@ -19,11 +19,11 @@ namespace LogicaNegocio.Entidades
         {
             if(FechaRealizado.Date == FechaEntrega.Date)
             {
-                MontoTotal = MontoSubtotal + (MontoSubtotal * 0.15);
+                MontoTotal = MontoSubtotal + (MontoSubtotal * ((double)ParametrosGenerales.RecargoExpressDia / 100));
             }
             else
             {
-                MontoTotal = MontoSubtotal + (MontoSubtotal * 0.1);
+                MontoTotal = MontoSubtotal + (MontoSubtotal * ((double)ParametrosGenerales.RecargoExpress / 100));
             }
 
             MontoTotal += MontoTotal * ((double)ParametrosGenerales.Iva / 100);
