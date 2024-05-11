@@ -26,6 +26,7 @@ namespace LogicaAccesoDatos.EF
             }
             obj.Validar();
             _context.Pedidos.Add(obj);
+            obj.CalcularRecargo();
             _context.SaveChanges();
         }
 

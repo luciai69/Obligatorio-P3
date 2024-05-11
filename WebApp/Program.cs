@@ -52,7 +52,9 @@ namespace WebApp
 
             //Pedido
             builder.Services.AddScoped<IObtener<Articulo>, ObtenerArticulo>();
+            builder.Services.AddScoped<IObtener<Cliente>, ObtenerCliente>();
             builder.Services.AddScoped<IAlta<PedidoExpressDto>, AltaPedidoExpress>();
+            builder.Services.AddScoped<IAlta<PedidoComunDto>, AltaPedidoComun>();
 
 
             // inyecta el contexto 

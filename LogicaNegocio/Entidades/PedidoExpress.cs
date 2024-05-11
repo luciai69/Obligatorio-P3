@@ -12,7 +12,7 @@ namespace LogicaNegocio.Entidades
 
             if (FechaEntrega > FechaRealizado.AddDays(ParametrosGenerales.Plazo))
             {
-                throw new FechaRealizadoPedidoInvalidaException();
+                throw new PlazoExpressPedidoInvalidaException();
             }
         }
         public override void CalcularRecargo()
@@ -26,7 +26,7 @@ namespace LogicaNegocio.Entidades
                 MontoTotal = MontoSubtotal + (MontoSubtotal * 0.1);
             }
 
-            MontoTotal = MontoTotal + (MontoTotal * (ParametrosGenerales.Iva/100));
+            MontoTotal =+ MontoTotal * ((double)ParametrosGenerales.Iva/100);
         }
     }
 }

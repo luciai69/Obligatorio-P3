@@ -19,6 +19,8 @@ namespace LogicaNegocio.CarpetaDtos
             Discriminator = discriminator;
         }
 
+        public PedidoComunDto() { }
+
         public int Id { get; set; }
         public DateTime FechaRealizado { get; set; }
         public int ClienteId { get; set; }

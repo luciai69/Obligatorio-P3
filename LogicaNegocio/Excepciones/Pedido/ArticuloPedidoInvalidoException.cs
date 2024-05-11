@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Excepciones.Pedido
 {
-    public class RecardoPedidoInvalidaException : PedidoException
+    public class ArticuloPedidoInvalidoException : PedidoException
     {
-        public RecardoPedidoInvalidaException() : base("El recargo debe ser mayor a 0.") { }   
+        public ArticuloPedidoInvalidoException() : base("Seleccione un articulo.") { }
     }
 }

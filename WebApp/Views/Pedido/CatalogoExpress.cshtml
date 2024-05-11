@@ -24,19 +24,18 @@
     }
 }
 <div>
-    <form method="post" action="Checkout">
+    <form method="post" action="CheckoutEx">
         <input type="text" name="IdCliente" placeholder="Id del cliente" />
         <input type="date" name="fechaEntrega" placeholder="Fecha de entrega (yyyy-mm-dd)" />
-        <button type="submit">Comprar</button>
+        <button type="submit" class="btn btn-primary">Comprar</button>
     </form>
-
-    <button type="button" id="btnLimpiar">Limpiar</button>
-    <button type="button" id="btnVer">Ver</button>
 </div>
 
-<div>
-    Cantidad de Item: @ViewBag.cantidad
-    Monto Subtotal: @ViewBag.total
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Cantidad de Item: @ViewBag.cantidad</li>
+        <li class="list-group-item">Monto Subtotal: @ViewBag.total</li>
+    </ul>
 </div>
 
 <table class="table">
@@ -85,7 +84,7 @@
                 @Html.DisplayFor(modelItem => item.Stock)
             </td>
                 <td>
-                    <form action="AgregarLinea" method="post">
+                    <form action="AgregarLineaEx" method="post">
                         <input type="int" name="idArticulo" value="@item.Id" hidden />
                         <input type="number" name="cantidad" class="form-control" />
                         <button type="submit" class="btn btn-primary">Agregar</button>
@@ -95,6 +94,10 @@
 }
     </tbody>
 </table>
+<div>
+    <button type="button" class="btn btn-primary" id="btnLimpiar">Limpiar</button>
+    <button type="button" class="btn btn-primary" id="btnVer">Ver</button>
+</div>
 
 @if (ViewBag.catalogo != null)
 {

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Excepciones.Pedido
 {
-    public class ClientePedidoInvalidaException : PedidoException
+    public class PedidoNuloException : PedidoException
     {
-        public ClientePedidoInvalidaException() : base ("Ingrese un cliente valido.") { }
+        public PedidoNuloException(): base("No se pudo recuperar el pedido.") { }
     }
 }

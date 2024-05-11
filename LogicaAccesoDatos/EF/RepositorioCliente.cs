@@ -39,7 +39,7 @@ namespace LogicaAccesoDatos.EF
 
         public Cliente GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
         }
 
         public IEnumerable<Cliente> GetByMonto(int monto)
