@@ -12,5 +12,7 @@ namespace LogicaNegocio.InterfacesRepositorio
         public IEnumerable<Pedido> GetByDate(DateTime dato);
 
         public void Anular(int id);
+
+        public IEnumerable<Pedido> GetByBool(bool dato);
     }
 }

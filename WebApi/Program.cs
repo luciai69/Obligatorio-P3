@@ -1,9 +1,11 @@
 using LogicaAccesoDatos.EF;
 using LogicaAplicacion.Articulos;
+using LogicaAplicacion.Pedidos;
 using LogicaNegocio.CarpetaDtos;
 using LogicaNegocio.Entidades;
 using LogicaNegocio.InterfacesRepositorio;
 using LogicaNegocio.InterfacesServicios;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,12 +18,18 @@ builder.Services.AddSwaggerGen();
 
 //repositorios
 builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
+builder.Services.AddScoped<IRepositorioPedido, RepositorioPedido>();
 
 //casos de uso articulos
 builder.Services.AddScoped<IObtenerTodos<ArticuloDto>, ObtenerArticulos>();
 
+//casos de uso pedidos
+builder.Services.AddScoped<IObtenerPorBool<PedidoDto>, ObtenerPedidosPorAnulado>();
+
 // inyecta el contexto 
-builder.Services.AddDbContext<PapeleriaContext>();
+builder.Services.AddDbContext<PapeleriaContext>(
+               options => options.UseSqlServer
+               (builder.Configuration.GetConnectionString("papeleria")));
 
 var app = builder.Build();
 

@@ -44,8 +44,9 @@ namespace LogicaAccesoDatos.EF
         public IEnumerable<Pedido> GetByDate(DateTime dato)
         {
             var pedidos = _context.Pedidos
-                 .Where(p => p.FechaEntrega.Date >= dato.Date)
+                 .Where(p => p.FechaRealizado.Date == dato.Date)
                  .Where(p => p.Anulado == false)
+                 .Where(p => p.FechaEntrega.Date >= DateTime.Now.Date)
                  .Include(cli => cli.Cliente)
                  .AsEnumerable().
                   ToList();
@@ -69,6 +70,18 @@ namespace LogicaAccesoDatos.EF
             pedido.Anular();
             _context.Pedidos.Update(pedido);
             _context.SaveChanges(true);
+        }
+
+
+        public IEnumerable<Pedido> GetByBool(bool dato)
+        {
+            var pedidos = _context.Pedidos
+                 .Where(p => p.Anulado == dato)
+                 .Include(cli => cli.Cliente)
+                 .OrderBy(p => p.FechaRealizado)
+                 .AsEnumerable().
+                  ToList();
+            return pedidos;
         }
 
         public void Update(int id, Pedido obj)

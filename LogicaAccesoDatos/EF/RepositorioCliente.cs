@@ -60,7 +60,7 @@ namespace LogicaAccesoDatos.EF
         public IEnumerable<Cliente> GetByString(string dato) 
         {
             return _context.Clientes.
-                Where(cliente => cliente.Rut.ToLower().Contains(dato.ToLower()));
+                Where(cliente => cliente.RazonSoc.ToLower().Contains(dato.ToLower()));
         }
     }
 }
