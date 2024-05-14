@@ -23,7 +23,7 @@ namespace LogicaNegocio.Entidades
             ContraseniaEncripada = EncodeStringToBase64(Contrasenia);
         }
 
-        private void ValidarMail() //TODO Validar que no se repita el mail.
+        private void ValidarMail()
         {
             var valEmail = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
 
@@ -35,7 +35,7 @@ namespace LogicaNegocio.Entidades
         }
 
 
-        private void ValidarContrasenia() //TODO Validar los temas de formato
+        private void ValidarContrasenia()
         {
             var valContrasenia = new Regex(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[,.!;]).{6,}$");
 

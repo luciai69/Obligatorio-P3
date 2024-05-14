@@ -9,12 +9,12 @@ using LogicaNegocio.InterfacesServicios;
 namespace LogicaAplicacion.Clientes
 {
     public class ObtenerClientes : IObtenerTodos<ClienteDto>
-        {
-            IRepositorioCliente _repositorioCliente;
+    {
+        IRepositorioCliente _repositorioCliente;
 
-            public ObtenerClientes(IRepositorioCliente repositorioCliente)
-            {
-                _repositorioCliente = repositorioCliente;
+        public ObtenerClientes(IRepositorioCliente repositorioCliente)
+        {
+            _repositorioCliente = repositorioCliente;
         }
         public IEnumerable<ClienteDto> Ejecutar()
         {

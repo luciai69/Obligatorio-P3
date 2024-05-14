@@ -29,7 +29,7 @@ namespace LogicaNegocio.Entidades
 
         private void ValidarCantidad()
         {
-            if(CantUnidades <= 0)
+            if(CantUnidades <= 0 || CantUnidades > Articulo.Stock)
             {
                 throw new CantLineaInvalidaException();
             }
@@ -41,11 +41,6 @@ namespace LogicaNegocio.Entidades
             {
                 throw new PrecioLineaInvalidaException();
             }
-        }
-
-        public double CalcularPrecio()
-        {
-            return CantUnidades * PrecioUnitarioVigente;
         }
     }
 }

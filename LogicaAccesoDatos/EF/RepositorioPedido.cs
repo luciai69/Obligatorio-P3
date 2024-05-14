@@ -78,7 +78,7 @@ namespace LogicaAccesoDatos.EF
             var pedidos = _context.Pedidos
                  .Where(p => p.Anulado == dato)
                  .Include(cli => cli.Cliente)
-                 .OrderBy(p => p.FechaRealizado)
+                 .OrderByDescending(p => p.FechaRealizado)
                  .AsEnumerable().
                   ToList();
             return pedidos;

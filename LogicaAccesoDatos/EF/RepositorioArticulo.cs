@@ -66,7 +66,7 @@ namespace LogicaAccesoDatos.EF
             return _context.Articulos.FirstOrDefault(articulo => articulo.Codigo == num);
         }
 
-        public Articulo GetByName(string name) //TODO Como uso esto para el validar?
+        public Articulo GetByName(string name)
         {
             return _context.Articulos.FirstOrDefault(articulo => articulo.Nombre == name);
         }
