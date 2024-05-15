@@ -18,6 +18,7 @@ namespace LogicaAccesoDatos.EF.Config
             .HasForeignKey(c => c.ClienteId);
 
             builder.HasMany(ped => ped.Lineas);
+
         }
     }
 }

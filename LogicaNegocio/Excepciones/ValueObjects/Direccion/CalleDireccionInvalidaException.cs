@@ -8,6 +8,6 @@ namespace LogicaNegocio.Excepciones.ValueObjects.Direccion
 {
     public class CalleDireccionInvalidaException : DireccionException
     {
-        public CalleDireccionInvalidaException() : base("La calle no puede estar vacia.") { }
+        public CalleDireccionInvalidaException() : base("La calle no puede estar vacía.") { }
     }
 }

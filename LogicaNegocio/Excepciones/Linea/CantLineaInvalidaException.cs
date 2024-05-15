@@ -8,6 +8,6 @@ namespace LogicaNegocio.Excepciones.Linea
 {
     public class CantLineaInvalidaException : LineaException
     {
-        public CantLineaInvalidaException(): base("Ingrese una cantidad valida.") { }
+        public CantLineaInvalidaException(): base("Ingrese una cantidad válida.") { }
     }
 }

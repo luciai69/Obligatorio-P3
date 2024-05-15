@@ -8,7 +8,7 @@ namespace LogicaNegocio.Excepciones.Cliente
 {
     public class RutClienteInvalidaException : ClienteException
     {
-        public RutClienteInvalidaException() : base("El RUT no puede estar vacio.") 
+        public RutClienteInvalidaException() : base("El RUT no puede estar vacío.") 
         { }
     }
 }

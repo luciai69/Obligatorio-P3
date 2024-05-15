@@ -31,7 +31,8 @@ namespace LogicaAccesoDatos.EF
 
             modelBuilder.ApplyConfiguration(new PedidoConfig());
             modelBuilder.ApplyConfiguration(new ClienteConfig());
-            modelBuilder.ApplyConfiguration(new UsuarioConfig());
+            modelBuilder.ApplyConfiguration(new UsuarioConfig()); 
+            modelBuilder.ApplyConfiguration(new ArticuloConfig());
 
             base.OnModelCreating(modelBuilder);
         }

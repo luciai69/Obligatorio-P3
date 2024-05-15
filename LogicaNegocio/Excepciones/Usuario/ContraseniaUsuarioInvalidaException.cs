@@ -8,6 +8,6 @@ namespace LogicaNegocio.Excepciones.Usuario
 {
     public class ContraseniaUsuarioInvalidaException : UsuarioException
     {
-        public ContraseniaUsuarioInvalidaException() : base("La contraseña no es valida.") { }
+        public ContraseniaUsuarioInvalidaException() : base("La contraseña no es válida.") { }
     }
 }

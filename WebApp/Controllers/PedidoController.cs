@@ -2,6 +2,7 @@
 using LogicaAplicacion.Usuarios;
 using LogicaNegocio.CarpetaDtos;
 using LogicaNegocio.Entidades;
+using LogicaNegocio.Excepciones.Linea;
 using LogicaNegocio.Excepciones.Pedido;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.AspNetCore.Mvc;
@@ -47,11 +48,13 @@ namespace WebApp.Controllers
 
         public IActionResult CatalogoExpress()
         {
+            BorrarViewBagPedido();
             return View(_obtenerArticulos.Ejecutar());
         }
 
         public IActionResult CatalogoComun()
         {
+            BorrarViewBagPedido();
             return View(_obtenerArticulos.Ejecutar());
         }
 
@@ -65,6 +68,14 @@ namespace WebApp.Controllers
                 if (articulo == null)
                 {
                     throw new ArticuloPedidoInvalidoException();
+                }
+                if (cantidad == 0)
+                {
+                    throw new CantLineaInvalidaException();
+                }
+                if (cantidad > articulo.Stock)
+                {
+                    throw new CantLineaInvalidaException();
                 }
 
                 PedidoExpressDto pedidoDto = GetPedidoExFromSession();
@@ -81,9 +92,9 @@ namespace WebApp.Controllers
                     Codigo = articulo.Codigo,
                     CantUnidades = cantidad,
                     PrecioUnitarioVigente = articulo.Precio
-                };//Esto se puede hacer en un metodo CrearLinea que reciba cant y articulo
+                };
 
-                pedidoDto.Lineas.Add(linea); //aca se llama al metodo
+                pedidoDto.Lineas.Add(linea);
                 pedidoDto.Cantidad += cantidad;
                 pedidoDto.MontoSubtotal += articulo.Precio * cantidad;
 
@@ -120,6 +131,7 @@ namespace WebApp.Controllers
                 pedidoExpressDto.FechaEntrega = fechaEntrega;
                 _altaPedidoExpress.Ejecutar(pedidoExpressDto);
 
+                BorrarViewBagPedido();
 
                 ViewBag.Error = false;
                 ViewBag.Mensaje = "Pedido realizado exitosamente.";
@@ -179,7 +191,14 @@ namespace WebApp.Controllers
                 {
                     throw new ArticuloPedidoInvalidoException();
                 }
-
+                if (cantidad == 0)
+                {
+                    throw new CantLineaInvalidaException();
+                }
+                if(cantidad > articulo.Stock)
+                {
+                    throw new CantLineaInvalidaException();
+                }
                 PedidoComunDto pedidoDto = GetPedidoComFromSession();
                 if (pedidoDto == null)
                 {
@@ -194,9 +213,9 @@ namespace WebApp.Controllers
                     Codigo = articulo.Codigo,
                     CantUnidades = cantidad,
                     PrecioUnitarioVigente = articulo.Precio
-                };//Esto se puede hacer en un metodo CrearLinea que reciba cant y articulo
+                };
 
-                pedidoDto.Lineas.Add(linea); //aca se llama al metodo
+                pedidoDto.Lineas.Add(linea); 
                 pedidoDto.Cantidad += cantidad;
                 pedidoDto.MontoSubtotal += articulo.Precio * cantidad;
 
@@ -235,7 +254,7 @@ namespace WebApp.Controllers
                 pedidoComunDto.ClienteId = IdCliente;
                 pedidoComunDto.FechaEntrega = fechaEntrega;
                 _altaPedidoComun.Ejecutar(pedidoComunDto);
-
+                BorrarViewBagPedido();
 
                 ViewBag.Error = false;
                 ViewBag.Mensaje = "Pedido realizado exitosamente.";
@@ -285,27 +304,66 @@ namespace WebApp.Controllers
             ViewBag.Mensaje = mensaje;
             return View();
         }
-        public IActionResult BuscarPorFecha(DateTime fechaEntrega)
+        public IActionResult BuscarPorFecha(DateTime fechaRealizado)
         {
-            return View("Index", _obtenerPedidos.Ejecutar(fechaEntrega));
+            try
+            {
+                if (fechaRealizado == DateTime.MinValue)
+                {
+                    throw new FechaRealizadoPedidoInvalidaException();
+                }
+                if (fechaRealizado > DateTime.Now)
+                {
+                    throw new FechaRealizadoPedidoInvalidaException();
+                }
 
+                IEnumerable<PedidoDto> listaPedidos = _obtenerPedidos.Ejecutar(fechaRealizado);
+
+                if (listaPedidos.Count() == 0)
+                {
+                    throw new ListaPedidosNulaException();
+                }
+                ViewBag.Error = false;
+                
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = true;
+                ViewBag.Mensaje = e.Message;
+
+            }
+
+            
+
+            return View("Index", _obtenerPedidos.Ejecutar(fechaRealizado));
         }
 
         public IActionResult Anular(int id)
         {
-            if (id == null)
-            {
-                return RedirectToAction("Index", new { mensaje = "No se encontró el pedido " + id });
-            }
+            
             try
             {
+                if (id == null)
+                {
+                    throw new PedidoNuloException();
+                }
+
                 _anularPedido.Ejecutar(id);
-                return RedirectToAction("Index", new { mensaje = "Pedido anulado correctamente."});
+                ViewBag.Error = false;
+                ViewBag.Mensaje = "Pedido anulado exitosamente.";
             }
             catch (Exception e)
             {
-                return RedirectToAction("Index", new { mensaje = e.Message });
+                ViewBag.Error = true;
+                ViewBag.Mensaje = e.Message;
             }
+
+            return View("Index");
+        }
+
+        public void BorrarViewBagPedido()
+        {
+            HttpContext.Session.Remove("SessionCompraDto");
         }
     }
 }

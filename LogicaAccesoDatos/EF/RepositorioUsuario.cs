@@ -1,6 +1,7 @@
 ﻿using LogicaNegocio.InterfacesRepositorio;
 using LogicaNegocio.Entidades;
 using LogicaAccesoDatos.Excepciones;
+using LogicaNegocio.Excepciones.Usuario;
 
 namespace LogicaAccesoDatos.EF
 {
@@ -49,7 +50,19 @@ namespace LogicaAccesoDatos.EF
 
         public Usuario Login(string email, string password)
         {
-            return _context.Usuarios.FirstOrDefault(usuario => usuario.Mail == email && usuario.ContraseniaEncripada == password);
+            Usuario usuario = GetByEmail(email);
+
+            if (usuario == null)
+            {
+                throw new UsuarioNullException();
+            }
+            else if (usuario.ContraseniaEncripada != password)
+            {
+                throw new UsuarioNullException();
+            }
+            else{
+                return usuario;
+            }
         }
 
         public Usuario GetById(int id)

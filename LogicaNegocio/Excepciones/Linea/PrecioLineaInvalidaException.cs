@@ -8,6 +8,6 @@ namespace LogicaNegocio.Excepciones.Linea
 {
     public class PrecioLineaInvalidaException : LineaException
     {
-        public PrecioLineaInvalidaException() : base("Ingrese un precio valido.") { }
+        public PrecioLineaInvalidaException() : base("Ingrese un precio válido.") { }
     }
 }

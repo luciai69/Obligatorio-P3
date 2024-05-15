@@ -25,7 +25,7 @@ namespace LogicaNegocio.Entidades
 
         private void ValidarMail()
         {
-            var valEmail = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            var valEmail = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");//PROMPT CHATGPT: Create a regex to validate an email.
 
             if (string.IsNullOrEmpty(Mail) || !valEmail.IsMatch(Mail))
             {
@@ -37,7 +37,7 @@ namespace LogicaNegocio.Entidades
 
         private void ValidarContrasenia()
         {
-            var valContrasenia = new Regex(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[,.!;]).{6,}$");
+            var valContrasenia = new Regex(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[,.!;]).{6,}$"); //PROMPT CHATGPT:Create a regular expression to validate a string: it should have a length of at least 6 characters, at least 1 capital letter, at least 1 lowercase letter, at least 1 integer, at least 1 of the following punctuation marks: a comma, a period, a semicolon or an exclamation mark
 
             if (string.IsNullOrEmpty(Contrasenia) || !valContrasenia.IsMatch(Contrasenia))
             {

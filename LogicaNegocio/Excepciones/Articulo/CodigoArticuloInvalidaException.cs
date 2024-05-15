@@ -8,7 +8,7 @@ namespace LogicaNegocio.Excepciones.Articulo
 {
     public class CodigoArticuloInvalidaException : ArticuloException
     {
-        public CodigoArticuloInvalidaException() : base ("El codigo debe tener 13 caracteres.")
+        public CodigoArticuloInvalidaException() : base ("El código debe tener 13 caracteres.")
         {
 
         }

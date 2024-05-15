@@ -8,7 +8,7 @@ namespace LogicaNegocio.Excepciones.Cliente
 {
     public class RazonSocClienteInvalidaException : ClienteException
     {
-        public RazonSocClienteInvalidaException() : base("La razon social no puede estar vacia.") 
+        public RazonSocClienteInvalidaException() : base("La razón social no puede estar vacía.") 
         {
             
         }

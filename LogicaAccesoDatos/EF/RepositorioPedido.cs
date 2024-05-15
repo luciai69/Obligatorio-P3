@@ -44,9 +44,7 @@ namespace LogicaAccesoDatos.EF
         public IEnumerable<Pedido> GetByDate(DateTime dato)
         {
             var pedidos = _context.Pedidos
-                 .Where(p => p.FechaRealizado.Date == dato.Date)
-                 .Where(p => p.Anulado == false)
-                 .Where(p => p.FechaEntrega.Date >= DateTime.Now.Date)
+                 .Where(p => p.FechaRealizado.Date == dato.Date && p.Anulado == false && p.FechaEntrega.Date >= DateTime.Now.Date)
                  .Include(cli => cli.Cliente)
                  .AsEnumerable().
                   ToList();
@@ -79,8 +77,8 @@ namespace LogicaAccesoDatos.EF
                  .Where(p => p.Anulado == dato)
                  .Include(cli => cli.Cliente)
                  .OrderByDescending(p => p.FechaRealizado)
-                 .AsEnumerable().
-                  ToList();
+                 .AsEnumerable()
+                 .ToList();
             return pedidos;
         }
 

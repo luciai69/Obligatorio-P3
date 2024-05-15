@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaAccesoDatos.Migrations
 {
     [DbContext(typeof(PapeleriaContext))]
-    [Migration("20240511153821_init")]
+    [Migration("20240515155927_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -43,7 +43,7 @@ namespace LogicaAccesoDatos.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Precio")
                         .HasColumnType("float");
@@ -52,6 +52,9 @@ namespace LogicaAccesoDatos.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Nombre")
+                        .IsUnique();
 
                     b.ToTable("Articulos");
                 });
@@ -70,9 +73,12 @@ namespace LogicaAccesoDatos.Migrations
 
                     b.Property<string>("Rut")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Rut")
+                        .IsUnique();
 
                     b.ToTable("Clientes");
                 });

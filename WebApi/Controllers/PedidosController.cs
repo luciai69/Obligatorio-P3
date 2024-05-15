@@ -10,7 +10,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PedidosController : Controller
+    public class PedidosController : ControllerBase
     {
         IObtenerPorBool<PedidoDto>  _obtenerPedidosPorAnulado;
 
@@ -30,7 +30,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                return Ok(_obtenerPedidosPorAnulado.Ejecutar(true));
+                IEnumerable<PedidoDto> listaPedidos = _obtenerPedidosPorAnulado.Ejecutar(true);
+                return Ok(listaPedidos);
             }
             //catch (NotFoundException e)
             //{

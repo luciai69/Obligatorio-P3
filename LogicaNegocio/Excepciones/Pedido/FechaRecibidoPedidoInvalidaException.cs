@@ -8,6 +8,6 @@ namespace LogicaNegocio.Excepciones.Pedido
 {
     public class FechaRecibidoPedidoInvalidaException : PedidoException
     {
-        public FechaRecibidoPedidoInvalidaException() : base ("Ingrese una fecha valida.") { }
+        public FechaRecibidoPedidoInvalidaException() : base ("Ingrese una fecha válida.") { }
     }
 }

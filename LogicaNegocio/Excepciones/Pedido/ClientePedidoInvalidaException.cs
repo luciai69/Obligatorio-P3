@@ -8,6 +8,6 @@ namespace LogicaNegocio.Excepciones.Pedido
 {
     public class ClientePedidoInvalidaException : PedidoException
     {
-        public ClientePedidoInvalidaException() : base ("Ingrese un cliente valido.") { }
+        public ClientePedidoInvalidaException() : base ("Ingrese un cliente válido.") { }
     }
 }

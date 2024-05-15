@@ -20,9 +20,9 @@ namespace WebApp.Controllers
         }
 
         [AdminAutorizado]
-        public IActionResult ObtenerPorRS(string rut)
+        public IActionResult ObtenerPorRS(string rs)
         {
-            return View("Index", _obtenerPorString.Ejecutar(rut));
+            return View("Index", _obtenerPorString.Ejecutar(rs));
         }
 
         [AdminAutorizado]

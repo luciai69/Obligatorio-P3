@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LogicaAplicacion\LogicaAplicacion.csproj" />
-    <ProjectReference Include="..\LogicaNegocio\LogicaNegocio.csproj" />
   </ItemGroup>
 
 </Project>

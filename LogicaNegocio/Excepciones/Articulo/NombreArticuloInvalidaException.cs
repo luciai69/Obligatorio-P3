@@ -8,7 +8,7 @@ namespace LogicaNegocio.Excepciones.Articulo
 {
     public class NombreArticuloInvalidaException : ArticuloException
     {
-        public NombreArticuloInvalidaException() : base("El nombre no puede estar vacio.")
+        public NombreArticuloInvalidaException() : base("El nombre no es válido.")
         {
 
         }

@@ -8,6 +8,6 @@ namespace LogicaNegocio.Excepciones.ValueObjects.NombreCompleto
 {
     internal class ApellidoNombreCompletoInvalidaException : NombreCompletoException
     {
-        public ApellidoNombreCompletoInvalidaException() : base("Ingrese un apellido.") { }
+        public ApellidoNombreCompletoInvalidaException() : base("Ingrese un apellido válido.") { }
     }
 }

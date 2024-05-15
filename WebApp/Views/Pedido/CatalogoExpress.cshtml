@@ -33,7 +33,7 @@
 
 <div class="card" style="width: 18rem;">
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cantidad de Item: @ViewBag.cantidad</li>
+        <li class="list-group-item">Cantidad de Artículos: @ViewBag.cantidad</li>
         <li class="list-group-item">Monto Subtotal: @ViewBag.total</li>
     </ul>
 </div>
@@ -95,7 +95,6 @@
     </tbody>
 </table>
 <div>
-    <button type="button" class="btn btn-primary" id="btnLimpiar">Limpiar</button>
     <button type="button" class="btn btn-primary" id="btnVer">Ver</button>
 </div>
 
@@ -108,19 +107,16 @@
             <thead>
                 <tr>
                     <th>
-                        Num Linea
-                    </th>
-                    <th>
-                        Id Articulo
+                        Id Artículo
                     </th>
                     <th>
                         Nombre 
                     </th>
                     <th>
-                        Descripcion
+                        Descripción
                     </th>
                     <th>
-                        Codigo
+                        Código
                     </th>
                     <th>
                         Cantidad
@@ -134,9 +130,6 @@
                 @foreach (LineaDto linea in ViewBag.catalogo)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => linea.Id)
-                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => linea.ArticuloId)
                         </td>

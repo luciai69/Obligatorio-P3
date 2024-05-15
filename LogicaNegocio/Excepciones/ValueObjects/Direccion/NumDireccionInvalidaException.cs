@@ -8,6 +8,6 @@ namespace LogicaNegocio.Excepciones.ValueObjects.Direccion
 {
     public class NumDireccionInvalidaException : DireccionException
     {
-        public NumDireccionInvalidaException() : base("El numero no puede estar vacio.") { }
+        public NumDireccionInvalidaException() : base("El número no puede estar vacio.") { }
     }
 }

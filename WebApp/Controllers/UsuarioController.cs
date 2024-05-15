@@ -1,6 +1,7 @@
 ﻿using LogicaAccesoDatos.Excepciones;
 using LogicaNegocio.CarpetaDtos;
 using LogicaNegocio.Entidades;
+using LogicaNegocio.Excepciones.Articulo;
 using LogicaNegocio.Excepciones.Usuario;
 using LogicaNegocio.InterfacesServicios;
 using Microsoft.AspNetCore.Http;
@@ -153,15 +154,12 @@ namespace WebApp.Controllers
         public IActionResult Login(string Mail, string Contrasenia)
         {
             string contraEncriptada = EncodeStringToBase64(Contrasenia);
-            Usuario unUsuario = _obtenerUsuarioPorDosString.Ejecutar(Mail, contraEncriptada);
-
+            
             try
             {
-                if(unUsuario == null)
-                {
-                    throw new UsuarioNullException();
-                }
-                if(unUsuario is Administrador)
+                Usuario unUsuario = _obtenerUsuarioPorDosString.Ejecutar(Mail, contraEncriptada);
+
+                if (unUsuario is Administrador)
                 {
                     HttpContext.Session.SetString("Rol", "Administrador");
                     HttpContext.Session.SetString("Nombre", unUsuario.NombreCompleto.Nombre);
@@ -169,12 +167,16 @@ namespace WebApp.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (UsuarioNullException e)
             {
-                ViewBag.Mensaje = "Pruebe de nuevo.";
+                ViewBag.Mensaje = e.Message;
+            }
+            catch (Exception e)
+            {
+                ViewBag.Mensaje = e.Message;
             }
 
-            return RedirectToAction("Index","Home");
+            return View();
 
         }
 
@@ -188,7 +190,7 @@ namespace WebApp.Controllers
         {
             HttpContext.Session.Clear();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Usuario");
         }
     }
 }

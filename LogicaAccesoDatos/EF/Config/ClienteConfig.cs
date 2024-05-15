@@ -21,6 +21,7 @@ namespace LogicaAccesoDatos.EF.Config
                 dir.Property(d => d.DistanciaPapeleria).HasColumnName("Direccion_distPapeleria");
             }
             );
+            builder.HasIndex(c => c.Rut).IsUnique();
         }
     }
 }

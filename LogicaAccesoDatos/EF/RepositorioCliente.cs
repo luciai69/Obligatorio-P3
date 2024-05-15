@@ -46,7 +46,7 @@ namespace LogicaAccesoDatos.EF
         {
             var clientes = _context.Clientes
                 .Where(cli => cli.Pedidos
-                .Any(ped => ped.MontoSubtotal >= monto))
+                .Any(ped => ped.MontoTotal >= monto))
                 .OrderBy(cli => cli.Rut);
             return clientes.ToList();
         }
@@ -59,8 +59,9 @@ namespace LogicaAccesoDatos.EF
 
         public IEnumerable<Cliente> GetByString(string dato) 
         {
-            return _context.Clientes.
-                Where(cliente => cliente.RazonSoc.ToLower().Contains(dato.ToLower()));
+            var clientes = _context.Clientes
+                .Where(cli => cli.RazonSoc.ToLower().Contains(dato.ToLower()));
+            return clientes.ToList();
         }
     }
 }

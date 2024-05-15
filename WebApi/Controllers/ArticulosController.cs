@@ -9,9 +9,8 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArticulosController : Controller
+    public class ArticulosController : ControllerBase
     {
-
        
         IObtenerTodos<ArticuloDto> _obtenerArticulos;
 

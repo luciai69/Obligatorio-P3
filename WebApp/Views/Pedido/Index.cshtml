@@ -8,14 +8,23 @@
 
 @if (ViewBag.Mensaje != null)
 {
-    <div class="alert alert-success" role="alert">
-        <p>@ViewBag.Mensaje</p>
-    </div>
+    @if (ViewBag.Error)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p>@ViewBag.Mensaje</p>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            <p>@ViewBag.Mensaje</p>
+        </div>
+    }
 }
 
 <div>
     <form action="/pedido/BuscarPorFecha">
-        <input type="date" name="fechaEntrega" placeholder="Fecha de entrega (yyyy-mm-dd)" />
+        <input type="date" name="fechaRealizado" />
         <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 </div>

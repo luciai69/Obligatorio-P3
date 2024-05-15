@@ -17,7 +17,7 @@ namespace LogicaAccesoDatos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Precio = table.Column<double>(type: "float", nullable: false),
@@ -35,7 +35,7 @@ namespace LogicaAccesoDatos.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RazonSoc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rut = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rut = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Direccion_calle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion_num = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion_ciudad = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -116,6 +116,18 @@ namespace LogicaAccesoDatos.Migrations
                         principalTable: "Pedidos",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Articulos_Nombre",
+                table: "Articulos",
+                column: "Nombre",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clientes_Rut",
+                table: "Clientes",
+                column: "Rut",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Linea_ArticuloId",

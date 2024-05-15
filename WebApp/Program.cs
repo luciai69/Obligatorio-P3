@@ -46,7 +46,7 @@ namespace WebApp
             builder.Services.AddScoped<IAlta<ArticuloDto>, AltaArticulo>();
             builder.Services.AddScoped<IObtenerTodos<ArticuloDto>, ObtenerArticulos>();
 
-            // estos no van creo, no son necesarios estos casos de uso segun la letra. preguntar al profe.
+            // No son necesarios. Extra.
             builder.Services.AddScoped<IEditar<Articulo>,  EditarArticulo>();
             builder.Services.AddScoped<IEliminar<Articulo>, EliminarArticulo>();
 

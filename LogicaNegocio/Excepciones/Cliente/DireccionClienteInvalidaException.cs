@@ -8,7 +8,7 @@ namespace LogicaNegocio.Excepciones.Cliente
 {
     public class DireccionClienteInvalidaException : ClienteException
     {
-        public DireccionClienteInvalidaException() : base ("Ingrese una direccion valida.")
+        public DireccionClienteInvalidaException() : base ("Ingrese una dirección válida.")
         { }
     }
 }

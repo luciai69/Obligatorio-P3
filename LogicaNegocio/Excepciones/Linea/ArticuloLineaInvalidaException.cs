@@ -8,6 +8,6 @@ namespace LogicaNegocio.Excepciones.Linea
 {
     public class ArticuloLineaInvalidaException : LineaException
     {
-        public ArticuloLineaInvalidaException() : base("Ingrese un articulo.") { }
+        public ArticuloLineaInvalidaException() : base("Ingrese un artículo.") { }
     }
 }
