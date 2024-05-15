@@ -22,7 +22,7 @@ namespace LogicaAccesoDatos.EF
             }
             if(GetByEmail(obj.Mail) != null)
             {
-                throw new InformacionRepetidaException();
+                throw new EmailRepetidoException();
             }
             obj.Validar();
             _context.Usuarios.Add(obj);

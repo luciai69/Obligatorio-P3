@@ -25,7 +25,6 @@ namespace LogicaNegocio.Entidades
             ValidarFechaRealizado();
             ValidarFechaEntrega();
             ValidarLinea();
-            ValidarCliente();
         }
 
         private void ValidarFechaRealizado() 
@@ -50,9 +49,8 @@ namespace LogicaNegocio.Entidades
             }
         }
 
-        private void ValidarCliente() 
+        private void ValidarClienteId() 
         {
-            Cliente cliente = new Cliente();
             if (ClienteId <= 0) 
             {
                 throw new ClientePedidoInvalidaException();

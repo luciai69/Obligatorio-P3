@@ -46,12 +46,12 @@ namespace WebApp.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(AdminDto adminDto)//TODO Ver DTOs
+        public IActionResult Create(AdminDto adminDto)
         {
             try
             {
                 _altaUsuario.Ejecutar(adminDto);
-                return RedirectToAction("Index", new { mensaje = "Usuario creado exitosamente." }); //TODO recibir en view.
+                return RedirectToAction("Index", new { mensaje = "Usuario creado exitosamente." });
             }
             catch (ContraseniaUsuarioInvalidaException e)
             {

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicaAccesoDatos.Excepciones
 {
-    internal class InformacionRepetidaException : RepositorioException
+    public class EmailRepetidoException : RepositorioException
     {
-        public InformacionRepetidaException() : base("No se pueden utilizar datos repetidos.") { }
-    
+        public EmailRepetidoException() : base("El mail ingresado ya se encuentra en uso.") { }
     }
 }

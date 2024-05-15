@@ -1,0 +1,1142 @@
+﻿***********************************
+Archivo: _ViewImports.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\_ViewImports.cshtml
+***********************************
+@using WebApp
+@using WebApp.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+***********************************
+Archivo: _ViewStart.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\_ViewStart.cshtml
+***********************************
+@{
+    Layout = "_Layout";
+}
+
+***********************************
+Archivo: Create.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Articulo\Create.cshtml
+***********************************
+@using LogicaNegocio.CarpetaDtos
+@model ArticuloDto
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Articulo</h4>
+
+@if (@ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Codigo" class="control-label"></label>
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stock" class="control-label"></label>
+                <input asp-for="Stock" class="form-control" />
+                <span asp-validation-for="Stock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+***********************************
+Archivo: Index.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Articulo\Index.cshtml
+***********************************
+@using LogicaNegocio.CarpetaDtos
+@model IEnumerable<ArticuloDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Agregar Articulo</a>
+</p>
+
+@if (@ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+***********************************
+Archivo: Index.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Cliente\Index.cshtml
+***********************************
+@using LogicaNegocio.CarpetaDtos
+@model IEnumerable<ClienteDto>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@if (@ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+<div>
+    <form action="/cliente/ObtenerPorRS">
+        <input type="text" name="rs" placeholder="Ingrese texto a buscar">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+<br />
+<div>
+    <form action="/cliente/ObtenerPorMonto">
+        <input type="number" name="monto" placeholder="Ingrese monto a buscar">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                Razon Social
+            </th>
+            <th>
+                RUT
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Calle)
+            </th>
+            <th>
+                Numero
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ciudad)
+            </th>
+            <th>
+                Dist (km)
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RazonSoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Num)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ciudad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistanciaPapeleria)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+***********************************
+Archivo: Index.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Home\Index.cshtml
+***********************************
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenido</h1>
+</div>
+
+
+@if (@ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+
+***********************************
+Archivo: Privacy.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Home\Privacy.cshtml
+***********************************
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+***********************************
+Archivo: CatalogoComun.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Pedido\CatalogoComun.cshtml
+***********************************
+@using LogicaNegocio.CarpetaDtos
+@model IEnumerable<LogicaNegocio.CarpetaDtos.ArticuloDto>
+
+@{
+    ViewData["Title"] = "Catalogo";
+}
+
+<h1>Catalogo</h1>
+
+
+@if (ViewBag.Mensaje != null)
+{
+    @if (ViewBag.Error)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p>@ViewBag.Mensaje</p>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            <p>@ViewBag.Mensaje</p>
+        </div>
+    }
+}
+<div>
+    <form method="post" action="CheckoutCom">
+        <input type="text" name="IdCliente" placeholder="Id del cliente" />
+        <input type="date" name="fechaEntrega" placeholder="Fecha de entrega (yyyy-mm-dd)" />
+        <button type="submit" class="btn btn-primary">Comprar</button>
+    </form>
+</div>
+
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Cantidad de Artículos: @ViewBag.cantidad</li>
+        <li class="list-group-item">Monto Subtotal: @ViewBag.total</li>
+    </ul>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    <form action="AgregarLineaCom" method="post">
+                        <input type="int" name="idArticulo" value="@item.Id" hidden />
+                        <input type="number" name="cantidad" class="form-control" />
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div >
+    <button type="button" class="btn btn-primary" id="btnVer">Ver</button>
+</div>
+@if (ViewBag.catalogo != null)
+{
+    <div id="catalogo" style="display:none">
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id Artículo
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Código
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Precio Unidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (LineaDto linea in ViewBag.catalogo)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.ArticuloId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.CantUnidades)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.PrecioUnitarioVigente)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+@section Scripts
+{
+    <script>
+        window.onload
+
+        const btnVer = document.querySelector('#btnVer');
+
+        btnVer.addEventListener('click', function () {
+            const catalogo = document.querySelector('#catalogo');
+            if (catalogo.style.display === "none") {
+                catalogo.style.display = "block";
+            } else {
+                catalogo.style.display = "none";
+            }
+        });
+    </script>
+}
+***********************************
+Archivo: CatalogoExpress.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Pedido\CatalogoExpress.cshtml
+***********************************
+@using LogicaNegocio.CarpetaDtos
+@model IEnumerable<LogicaNegocio.CarpetaDtos.ArticuloDto>
+
+@{
+    ViewData["Title"] = "Catalogo";
+}
+
+<h1>Catalogo</h1>
+
+
+@if (ViewBag.Mensaje != null)
+{
+    @if (ViewBag.Error)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p>@ViewBag.Mensaje</p>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            <p>@ViewBag.Mensaje</p>
+        </div>
+    }
+}
+<div>
+    <form method="post" action="CheckoutEx">
+        <input type="text" name="IdCliente" placeholder="Id del cliente" />
+        <input type="date" name="fechaEntrega" placeholder="Fecha de entrega (yyyy-mm-dd)" />
+        <button type="submit" class="btn btn-primary">Comprar</button>
+    </form>
+</div>
+
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Cantidad de Artículos: @ViewBag.cantidad</li>
+        <li class="list-group-item">Monto Subtotal: @ViewBag.total</li>
+    </ul>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+                <td>
+                    <form action="AgregarLineaEx" method="post">
+                        <input type="int" name="idArticulo" value="@item.Id" hidden />
+                        <input type="number" name="cantidad" class="form-control" />
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </form>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <button type="button" class="btn btn-primary" id="btnVer">Ver</button>
+</div>
+
+@if (ViewBag.catalogo != null)
+{
+    <div id="catalogo" style="display:none">
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id Artículo
+                    </th>
+                    <th>
+                        Nombre 
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Código
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Precio Unidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (LineaDto linea in ViewBag.catalogo)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.ArticuloId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.CantUnidades)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => linea.PrecioUnitarioVigente)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+@section Scripts
+{
+    <script>      
+        window.onload
+
+        const btnVer = document.querySelector('#btnVer');
+
+        btnVer.addEventListener('click', function () {
+            const catalogo = document.querySelector('#catalogo');
+            if (catalogo.style.display === "none") {
+                catalogo.style.display = "block";
+            } else {
+                catalogo.style.display = "none";
+            }
+        });
+    </script>
+}
+***********************************
+Archivo: Index.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Pedido\Index.cshtml
+***********************************
+@model IEnumerable<LogicaNegocio.CarpetaDtos.PedidoDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pedidos</h1>
+
+@if (ViewBag.Mensaje != null)
+{
+    @if (ViewBag.Error)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p>@ViewBag.Mensaje</p>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            <p>@ViewBag.Mensaje</p>
+        </div>
+    }
+}
+
+<div>
+    <form action="/pedido/BuscarPorFecha">
+        <input type="date" name="fechaRealizado" />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    Fecha de Entrega
+                </th>
+                <th>
+                    Nombre Cliente
+                </th>
+                <th>
+                    Monto Total ($)
+                </th>
+                <th>
+                    Tipo
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaEntrega.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClienteNombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MontoTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Discriminator)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Anular", "Anular", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+***********************************
+Archivo: Error.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Shared\Error.cshtml
+***********************************
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
+<h3>Development Mode</h3>
+<p>
+    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
+</p>
+<p>
+    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
+    It can result in displaying sensitive information from exceptions to end users.
+    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
+    and restarting the app.
+</p>
+
+***********************************
+Archivo: _Layout.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Shared\_Layout.cshtml
+***********************************
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                @if(Context.Session.GetString("Rol") == "Administrador")
+                {
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Articulo" asp-action="Index">Artículos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="CatalogoExpress">Compra Express</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="CatalogoComun">Compra Comun</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Logout</a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Login">Login</a>
+                        </li>
+                    </ul>
+
+                }
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+***********************************
+Archivo: _ValidationScriptsPartial.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Shared\_ValidationScriptsPartial.cshtml
+***********************************
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+***********************************
+Archivo: Create.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Usuario\Create.cshtml
+***********************************
+@using LogicaNegocio.CarpetaDtos
+@model AdminDto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Crear Usuario</h1>
+
+<h4>Usuario</h4>
+<hr />
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Mail" class="control-label"></label>
+                <input asp-for="Mail" class="form-control" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contrasenia" class="control-label">Contraseña</label>
+                <input asp-for="Contrasenia" class="form-control" />
+                <span asp-validation-for="Contrasenia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+***********************************
+Archivo: Delete.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Usuario\Delete.cshtml
+***********************************
+@using LogicaNegocio.CarpetaDtos
+@model UsuarioDto
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Borrar</h1>
+
+<h3>¿Está seguro que desea borrar este Usuario?</h3>
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mail)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Contrasenia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Contrasenia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Discriminator)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Discriminator)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Borrar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver</a>
+    </form>
+</div>
+
+***********************************
+Archivo: Edit.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Usuario\Edit.cshtml
+***********************************
+@using LogicaNegocio.CarpetaDtos
+@model UsuarioDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Id" input type="hidden" readonly="" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Mail" input type="hidden" readonly="" class="form-control" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contrasenia" class="control-label"></label>
+                <input asp-for="Contrasenia" class="form-control" />
+                <span asp-validation-for="Contrasenia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Discriminator" input type="hidden" readonly="" class="form-control" />
+                <span asp-validation-for="Discriminator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+***********************************
+Archivo: Index.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Usuario\Index.cshtml
+***********************************
+@using LogicaNegocio.CarpetaDtos
+@model IEnumerable<UsuarioDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Crear Usuario</a>
+</p>
+
+@if (@ViewBag.Mensaje != null)
+{
+    <div class="alert alert-secondary" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contrasenia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discriminator)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mail)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contrasenia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discriminator)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+***********************************
+Archivo: Login.cshtml
+Carpeta: C:\Users\Lucia\Documents\GitHub\Obligatorio-1-P3v2\Obligatorio-P3\WebApp\Views\Usuario\Login.cshtml
+***********************************
+@model LogicaNegocio.CarpetaDtos.AdminDto
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@ViewBag.Mensaje</p>
+    </div>
+}
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Mail" class="control-label"></label>
+                <input asp-for="Mail" class="form-control" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contrasenia" class="control-label">Contraseña</label>
+                <input asp-for="Contrasenia" class="form-control" />
+                <span asp-validation-for="Contrasenia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Volver</a> 
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

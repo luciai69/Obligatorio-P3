@@ -77,6 +77,14 @@ namespace WebApp.Controllers
             {
                 ViewBag.Mensaje = e.Message;
             }
+            catch (NombreRepetidoRepositorioException e) 
+            {
+                ViewBag.Mensaje = e.Message;
+            }
+            catch (CodigoRepetidoRepositorioException e)
+            {
+                ViewBag.Mensaje = e.Message;
+            }
             catch (PrecioArticuloInvalidaException e)
             {
                 ViewBag.Mensaje = e.Message;
